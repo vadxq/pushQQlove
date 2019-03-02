@@ -1,0 +1,35 @@
+{
+  "name": "pushqqlove",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server/app.js --exec babel-node",
+    "build": "babel ./server/ -d dist",
+    "serve": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadxq/pushQQlove.git"
+  },
+  "author": "vadxq <dongxianlin@vadxq.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vadxq/pushQQlove/issues"
+  },
+  "homepage": "https://github.com/vadxq/pushQQlove#readme",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.4.0",
+    "puppeteer": "^1.12.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "nodemon": "^1.18.10"
+  }
+}
