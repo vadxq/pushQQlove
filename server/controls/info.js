@@ -1,28 +1,31 @@
 import mongoose from 'mongoose';
 require('../mongo/schema/info');
 const Info = mongoose.model('Info');
+import spider from './spider';
+console.log(new spider())
 
 // 添加文章(admin)
-export const saveArticle = async (ctx, next) => {
-    const body = ctx.request.body;
-    const info = new Info(body);
-    const saveInfo = await info.save();
-  
-    if (saveInfo) {
-      ctx.body = {
-        status: 1,
-        msg: saveInfo
-      };
-    } else {
-      console.log(changeInfo);
-      ctx.body = {
-        status: 0
-      };
+export const saveInfo = async (ctx, next) => {
+  console.log(ctx.state)
+  const body = ctx.state.infoMsg;
+  const info = new Info(body);
+  const saveInfo = await info.save();
+
+  if (saveInfo) {
+    ctx.body = {
+      status: 1,
+      msg: saveInfo
     };
+  } else {
+    console.log(changeInfo);
+    ctx.body = {
+      status: 0
+    };
+  };
 };
 
 // 获取列表
-export const fetchArticle = async (ctx, next) => {
+export const getInfoList = async (ctx, next) => {
   const info = await Info.find({
     dele: false
   }, {
