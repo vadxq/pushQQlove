@@ -23,7 +23,7 @@ app
 
 // new timing()
 let timings = new timingTask()
-schedule.scheduleJob('16 35 * * * *', () => {
+schedule.scheduleJob('16 37 * * * *', () => {
   timings.init()
 })
 

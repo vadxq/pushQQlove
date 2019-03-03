@@ -36,7 +36,7 @@ export default class spider {
       // get word
       let page = await axios(`http://wufazhuce.com/one/${this.id}`)
       let ele = await cheerio('.one-cita', page.data).text()
-      str = ele.replace(/^\s+|\s+$/g, '')
+      let str = ele.replace(/^\s+|\s+$/g, '')
       console.log(str)
       return str
     } catch (err) {
