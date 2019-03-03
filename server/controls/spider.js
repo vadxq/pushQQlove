@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import axios from 'axios';
 import dayComputed from './day';
-import cheerio = require('cheerio')
+import cheerio from 'cheerio';
 
 export default class spider {
   constructor(city) {
