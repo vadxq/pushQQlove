@@ -24,7 +24,6 @@ export const saveInfo = async (ctx, next) => {
 
 // 获取列表
 export const getInfoList = async (ctx, next) => {
-  console.log(spiderMsg)
   const info = await Info.find({
     dele: false
   }, {

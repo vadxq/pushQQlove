@@ -20,12 +20,12 @@ export default class timingTask {
   // good morning
   async postMsg (msg) {
     try {
-      // let data = await axios.post(`http://127.0.0.1:7187/send_group_msg`, {
+      // let data = await axios.post(`http://0.0.0.0:7187/send_group_msg`, {
       //   group_id: 851970427,
       //   message: msg,
       //   auto_escape: false
       // })
-      let data = await axios.post(`http://127.0.0.1:7187/send_private_msg`, {
+      let data = await axios.post(`http://0.0.0.0:7187/send_private_msg`, {
         user_id: 862235971,
         message: msg,
         auto_escape: false

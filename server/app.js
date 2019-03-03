@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
-import { port, time } from './config/index';
+import { port } from './config/index';
 import json from 'koa-json';
 import routes from './route';
 import timingTask from './controls/timing';
@@ -27,7 +27,7 @@ console.log(`app run in ${port}`)
 
 // new timing()
 let timings = new timingTask()
-schedule.scheduleJob(time, () => {
+schedule.scheduleJob('35 58 * * *', () => {
   timings.init()
 })
 
