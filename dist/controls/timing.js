@@ -82,8 +82,8 @@ var timingTask = function () {
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _axios2.default.post('http://127.0.0.1:7187/send_private_msg', {
-                  user_id: 862235971,
+                return _axios2.default.post('http://127.0.0.1:7187/send_group_msg', {
+                  group_id: 851970427,
                   message: msg,
                   auto_escape: false
                 });
@@ -91,6 +91,11 @@ var timingTask = function () {
               case 3:
                 data = _context2.sent;
 
+                // let data = await axios.post(`http://127.0.0.1:7187/send_private_msg`, {
+                //   user_id: 862235971,
+                //   message: msg,
+                //   auto_escape: false
+                // })
                 console.log(data);
 
                 if (!(data.status === 200)) {

@@ -34,12 +34,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // new timing()
 var timings = new _timing2.default();
-_nodeSchedule2.default.scheduleJob('59 59 * * * *', function () {
+_nodeSchedule2.default.scheduleJob('59 59 06 * * *', function () {
   timings.init();
 });
 
 // 定时睡觉
-_nodeSchedule2.default.scheduleJob('10 30 * * * *', function () {
+_nodeSchedule2.default.scheduleJob('10 30 23 * * *', function () {
   timings.postMsg('缘缘，到点啦，该睡啦，晚安哟~~');
 });
 

@@ -10,12 +10,12 @@ import schedule from 'node-schedule';
 
 // new timing()
 let timings = new timingTask()
-schedule.scheduleJob('59 59 * * * *', () => {
+schedule.scheduleJob('59 59 06 * * *', () => {
   timings.init()
 })
 
 // 定时睡觉
-schedule.scheduleJob('10 30 * * * *', () => {
+schedule.scheduleJob('10 30 23 * * *', () => {
   timings.postMsg('缘缘，到点啦，该睡啦，晚安哟~~')
 })
 
