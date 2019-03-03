@@ -14,7 +14,6 @@ export default class spider {
     let word = await this.getWord();
     let weather = await this.getWeather()
     let img = await this.getImg();
-    this.closeBrowser()
     let data = {
       word,
       img,
