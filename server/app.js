@@ -7,18 +7,6 @@ import routes from './route';
 import timingTask from './controls/timing';
 import schedule from 'node-schedule';
 
-
-// new timing()
-let timings = new timingTask()
-schedule.scheduleJob('59 59 06 * * *', () => {
-  timings.init()
-})
-
-// 定时睡觉
-schedule.scheduleJob('10 30 23 * * *', () => {
-  timings.postMsg('缘缘，到点啦，该睡啦，晚安哟~~')
-})
-
 require('./mongo');
 
 const app = new Koa();
@@ -30,9 +18,20 @@ app.use(json());
 router.use('', routes.routes());
 
 app
-  .use(router.routes())
-  .use(router.allowedMethods());
+.use(router.routes())
+.use(router.allowedMethods());
 
 app.listen(port)
 
 console.log(`app run in ${port}`)
+
+// new timing()
+let timings = new timingTask()
+schedule.scheduleJob('30  34 * * *', () => {
+  timings.init()
+})
+
+// 定时睡觉
+schedule.scheduleJob('10 28 23 * * *', () => {
+  timings.postMsg('缘缘，到点啦，该睡啦，晚安哟~~')
+})

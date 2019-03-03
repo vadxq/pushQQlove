@@ -7,7 +7,7 @@ const infoSchema = new Schema({
     type: Date,
     default: Date.now()
   },
-  channel: String, // 发送频道
+  // channel: String, // 发送频道
   content: String, // 内容
   img: String, // 图片
   dele: {

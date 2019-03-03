@@ -29,7 +29,7 @@ export const getInfoList = async (ctx, next) => {
     dele: false
   }, {
     _id: 1,
-    channel: 1,
+    // channel: 1,
     createtime: 1,
     content: 1,
     img: 1
