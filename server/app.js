@@ -16,7 +16,7 @@ schedule.scheduleJob('59 59 * * * *', () => {
 
 // 定时睡觉
 schedule.scheduleJob('10 30 * * * *', () => {
-  await timings.postMsg ('缘缘，到点啦，该睡啦，晚安哟~~')
+  timings.postMsg('缘缘，到点啦，该睡啦，晚安哟~~')
 })
 
 require('./mongo');
