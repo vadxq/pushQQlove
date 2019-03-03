@@ -16,7 +16,9 @@ export default class spider {
   }
 
   // get page id
-  async getId() {}
+  async getId() {
+    
+  }
 
   // get words
   async getWord(id) {
