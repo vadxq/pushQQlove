@@ -21,13 +21,9 @@ app
 .use(router.routes())
 .use(router.allowedMethods());
 
-app.listen(port)
-
-console.log(`app run in ${port}`)
-
 // new timing()
 let timings = new timingTask()
-schedule.scheduleJob('35 58 * * *', () => {
+schedule.scheduleJob('16 02 * * * *', () => {
   timings.init()
 })
 
@@ -35,3 +31,7 @@ schedule.scheduleJob('35 58 * * *', () => {
 schedule.scheduleJob('10 28 23 * * *', () => {
   timings.postMsg('缘缘，到点啦，该睡啦，晚安哟~~')
 })
+
+app.listen(port)
+
+console.log(`app run in ${port}`)
