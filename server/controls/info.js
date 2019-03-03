@@ -2,7 +2,12 @@ import mongoose from 'mongoose';
 require('../mongo/schema/info');
 const Info = mongoose.model('Info');
 import spider from './spider';
-console.log(new spider())
+let spiders = new spider(101190901)
+let spiderMsg = spiders.init()
+
+// send msg
+let content = `
+`
 
 // 添加文章(admin)
 export const saveInfo = async (ctx, next) => {

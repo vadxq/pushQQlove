@@ -4,7 +4,7 @@ export default class dayComputed {
     // 第一个参数必须传
     this.startDay = startDay
     this.endDay = endDay
-    this.fn()
+    // this.fn()
   }
   fn () {
     // 计算函数

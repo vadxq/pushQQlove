@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/vadxq/pushQQlove#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-json": "^2.0.2",
