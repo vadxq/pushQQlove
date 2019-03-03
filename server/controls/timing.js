@@ -20,7 +20,7 @@ export default class timingTask {
   // good morning
   async postMsg (msg) {
     try {
-      // let data = await axios.post(`http://115.159.83.44:7187/send_group_msg`, {
+      // let data = await axios.post(`http://127.0.0.1:7187/send_group_msg`, {
       //   group_id: 851970427,
       //   message: msg,
       //   auto_escape: false
@@ -30,7 +30,7 @@ export default class timingTask {
         message: msg,
         auto_escape: false
       })
-      console.log(data)
+      console.log(data.data)
       if (data.status === 200) {
         let data = {
           content: msg[0].data.text,
