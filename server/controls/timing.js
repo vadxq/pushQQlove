@@ -20,16 +20,16 @@ export default class timingTask {
   // good morning
   async postMsg (msg) {
     try {
-      // let data = await axios.post(`http://0.0.0.0:7187/send_group_msg`, {
-      //   group_id: 851970427,
-      //   message: msg,
-      //   auto_escape: false
-      // })
-      let data = await axios.post(`http://0.0.0.0:7187/send_private_msg`, {
-        user_id: 862235971,
+      let data = await axios.post(`http://0.0.0.0:7187/send_group_msg`, {
+        group_id: 851970427,
         message: msg,
         auto_escape: false
       })
+      // let data = await axios.post(`http://0.0.0.0:7187/send_private_msg`, {
+      //   user_id: 862235971,
+      //   message: msg,
+      //   auto_escape: false
+      // })
       console.log(data.data)
       if (data.status === 200) {
         let data = {
@@ -65,7 +65,7 @@ export default class timingTask {
           缘缘，此刻外面温度为${this.spiderMsg.weather.wendu}°，${this.spiderMsg.weather.ganmao},
           今天${this.spiderMsg.weather.forecast[0].high},${this.spiderMsg.weather.forecast[0].low},
           湿度${this.spiderMsg.weather.shidu},
-          PM2.5${this.spiderMsg.weather.pm25},空气质量${this.spiderMsg.weather.quality},
+          PM2.5: ${this.spiderMsg.weather.pm25},空气质量: ${this.spiderMsg.weather.quality},
           ${this.spiderMsg.weather.forecast[0].notice}。\n
           今日语录：${this.spiderMsg.word}
           `
