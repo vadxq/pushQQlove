@@ -1,4 +1,3 @@
-import puppeteer from 'puppeteer';
 import axios from 'axios';
 import dayComputed from './day';
 import cheerio from 'cheerio';
