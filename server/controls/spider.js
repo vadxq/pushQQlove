@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer';
 import axios from 'axios';
-import dayComputed from './day'
+import dayComputed from './day';
+import cheerio = require('cheerio')
 
 export default class spider {
   constructor(city) {
@@ -10,10 +11,6 @@ export default class spider {
   }
 
   async init() {
-    console.log('start browser');
-    this.browser = await puppeteer.launch();
-    console.log('start new page');
-    this.page = await this.browser.newPage();
     await this.getId();
     let word = await this.getWord();
     let weather = await this.getWeather()
@@ -36,19 +33,13 @@ export default class spider {
 
   // get words
   async getWord() {
-    let page = this.page;
-    await page.goto(`http://wufazhuce.com/one/${this.id}`);
     try {
       // get word
-      let sText = await page.$eval('.one-cita', el => {
-        let txt = el.innerText
-        str = txt.replace(/^\s+|\s+$/g, '')
-        return str;
-      });
-     
-      // save
-      return sText
-
+      let page = await axios(`http://wufazhuce.com/one/${this.id}`)
+      let ele = await cheerio('.one-cita', page.data).text()
+      str = ele.replace(/^\s+|\s+$/g, '')
+      console.log(str)
+      return str
     } catch (err) {
       console.log(`err:id=${this.id},errmsg:${err}`)
     }
@@ -82,11 +73,5 @@ export default class spider {
     } catch (error) {
       console.error(error)
     }
-  }
-
-  // close browser
-  async closeBrowser() {
-    console.log('close browser');
-    await this.browser.close();
   }
 }
