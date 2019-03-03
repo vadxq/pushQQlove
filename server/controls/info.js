@@ -1,18 +1,11 @@
 import mongoose from 'mongoose';
 require('../mongo/schema/info');
 const Info = mongoose.model('Info');
-import spider from './spider';
-let spiders = new spider(101190901)
-let spiderMsg = spiders.init()
-
-// send msg
-let content = `
-`
 
 // 添加文章(admin)
 export const saveInfo = async (ctx, next) => {
   console.log(ctx.state)
-  const body = ctx.state.infoMsg;
+  const body = ctx.request.body;
   const info = new Info(body);
   const saveInfo = await info.save();
 
@@ -31,6 +24,7 @@ export const saveInfo = async (ctx, next) => {
 
 // 获取列表
 export const getInfoList = async (ctx, next) => {
+  console.log(spiderMsg)
   const info = await Info.find({
     dele: false
   }, {

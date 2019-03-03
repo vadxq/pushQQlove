@@ -6,7 +6,7 @@ export default class spider {
   constructor(city) {
     this.id
     this.city = city
-    this.init();
+    // this.init();
   }
 
   async init() {
@@ -19,17 +19,19 @@ export default class spider {
     let weather = await this.getWeather()
     let img = await this.getImg();
     this.closeBrowser()
-    return {
+    let data = {
       word,
       img,
       weather
     }
+    console.log(data)
+    return data
   }
 
   // get page id
   async getId() {
     let day = new dayComputed('2019-3-1')
-    this.id = day.fn() + 2367
+    this.id = day.fn() + 2366
   }
 
   // get words
@@ -45,7 +47,7 @@ export default class spider {
       });
      
       // save
-      await console.log(sText)
+      return sText
 
     } catch (err) {
       console.log(`err:id=${this.id},errmsg:${err}`)
@@ -57,7 +59,7 @@ export default class spider {
     try {
       let data = await axios.get(`https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN`)
       if (data.status === 200) {
-        console.log(`https://www.bing.com/${data.data.images[0].url}`, data.data.images[0].copyright)
+        // console.log(`https://www.bing.com/${data.data.images[0].url}`, data.data.images[0].copyright)
         return data.data.images[0]
       } else {
         return 

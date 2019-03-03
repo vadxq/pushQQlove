@@ -21,11 +21,13 @@
   "homepage": "https://github.com/vadxq/pushQQlove#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "cqhttp": "^1.1.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
     "mongoose": "^5.4.16",
+    "node-schedule": "^1.3.2",
     "puppeteer": "^1.12.2",
     "request": "^2.88.0"
   },

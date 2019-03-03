@@ -4,6 +4,20 @@ import bodyParser from 'koa-bodyparser';
 import { port } from './config/index';
 import json from 'koa-json';
 import routes from './route';
+import timingTask from './controls/timing';
+import schedule from 'node-schedule';
+
+
+// new timing()
+let timings = new timingTask()
+schedule.scheduleJob('59 59 * * * *', () => {
+  timings.init()
+})
+
+// 定时睡觉
+schedule.scheduleJob('10 30 * * * *', () => {
+  await timings.postMsg ('缘缘，到点啦，该睡啦，晚安哟~~')
+})
 
 require('./mongo');
 
