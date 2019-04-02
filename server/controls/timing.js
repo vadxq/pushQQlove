@@ -1,6 +1,7 @@
 import spider from './spider';
 import dayComputed from './day';
 import axios from 'axios';
+import { group_id, user_id } from '../config/index'
 
 // 定时任务
 export default class timingTask {
@@ -21,12 +22,12 @@ export default class timingTask {
   async postMsg (msg) {
     try {
       let data = await axios.post(`http://0.0.0.0:7187/send_group_msg`, {
-        group_id: 851970427,
+        group_id: group_id,
         message: msg,
         auto_escape: false
       })
       // let data = await axios.post(`http://0.0.0.0:7187/send_private_msg`, {
-      //   user_id: 862235971,
+      //   user_id: user_id,
       //   message: msg,
       //   auto_escape: false
       // })
@@ -48,6 +49,7 @@ export default class timingTask {
 
   // 获取爬虫数据
   async getSpiderMsg () {
+    // 城市编码，按照国家的来
     let spiders = new spider(101190901)
     this.spiderMsg = await spiders.init()
   }
