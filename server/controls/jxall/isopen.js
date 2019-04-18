@@ -1,5 +1,5 @@
 // 获取开服查询
-exports.getIsOpen = async (ele) => {
+export default getIsOpen = async (ele) => {
   const { stdout, stderr } = await exec(ele);
   if (stderr) {
     console.error(`error: ${stderr}`);

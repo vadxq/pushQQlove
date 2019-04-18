@@ -1,6 +1,17 @@
 const CQHttp = require('cqhttp');
 const axios = require('axios');
-const getIsOpen = require('../controls/jxall/isopen')
+
+// 获取开服查询
+const getIsOpen = async (ele) => {
+  const { stdout, stderr } = await exec(ele);
+  if (stderr) {
+    console.error(`error: ${stderr}`);
+    return '未开服'
+  } else {
+    console.log(`Number of files ${stdout}`);
+    return '已开服'
+  }
+};
 
 const bot = new CQHttp({
   apiRoot: 'http://127.0.0.1:7187/'
@@ -11,20 +22,16 @@ bot.on('message', async context => {
   if (context.post_type === 'message' && context.message_type === 'group') {
     if (context.message === '开服查询姨妈') {
       let res = await getIsOpen('ping -c 4 121.14.64.155')
-      let reply = '未开服'
-      if (res) {
-        reply = '已开服'
-      }
       bot('send_group_msg_async', {
         group_id: context.group_id,
-        message: reply
+        message: res
       }).catch(err => { });
     }
     if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
       // 宏
       
       let reply = '请输入正确心法'
-      let res = await axios(`http://127.0.0.1:7192/api/accept?sect=${context.message}`)
+      let res = await axios(`http://0.0.0.0:7192/api/accept?sect=${context.message}`)
       if (res) {
         reply = context.message + '\n' + res.qixue + '\n' + res.hong
       }
