@@ -4,30 +4,17 @@ import mongoose from 'mongoose';
 require('../mongo/schema/jxhong');
 const Jxhong = mongoose.model('Jxhong');
 
-// 获取开服查询
-export const getIsOpen = async (ele) => {
-    const { stdout, stderr } = await exec(ele);
-    if (stderr) {
-      console.error(`error: ${stderr}`);
-      return 0
-    } else {
-      console.log(`Number of files ${stdout}`);
-      return 1
-    }
-    
-  // let hosts = 'ping 121.14.64.155'
-};
-
 // 获取宏
-export const getHong = async (ele) => {
-  let data = await Jxhong.findOne({sect: ele, dele: false})
+export const getHong = async (ctx, next) => {
+  const ele = ctx.params
+  let data = await Jxhong.findOne({sect: ele.sect, dele: false})
   if (data) {
-    return {
+    ctx.body = {
       status: 1,
       data: data
     }
   } else {
-    return {
+    ctx.body = {
       status: 0
     }
   }
