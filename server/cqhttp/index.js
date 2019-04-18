@@ -30,13 +30,12 @@ bot.on('message', async context => {
     }
     if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
       // 宏
-
-      console.log(context.message)
       let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + context.message)
       let reply
       let res = await axios.get(url)
       if (res.data.status) {
-        reply = context.message + '\n' + res.data.qixue + '\n' + res.data.hong
+        reply = context.message + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
+        console.log(reply)
       } else {
         reply = '请输入正确心法'
       }
