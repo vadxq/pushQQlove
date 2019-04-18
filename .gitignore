@@ -62,4 +62,4 @@ typings/
 
 dist/
 
-server/config/index.js
+server/config/sec.js

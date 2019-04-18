@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { dbPath } from '../config';
+import { dbPath } from '../config/sec';
 
 require('./schema/info');
 
