@@ -40,7 +40,7 @@ export const postQQMsg = async (ctx, next) => {
   if (body) {
     if (body.post_type === 'message' && body.message_type === 'group') {
       if (body.message === '开服查询姨妈') {
-        let res = await getIsOpen()
+        let res = await getIsOpen('ping 121.14.64.155')
         let reply = '未开服'
         if (res) {
           reply = '已开服'
@@ -56,7 +56,7 @@ export const postQQMsg = async (ctx, next) => {
           reply = body.message + '\n' + res.qixue + '\n' + res.hong
         }
         ctx.body = {
-          reply: reply
+          reply: '未查询到'
         }
       }
     }
