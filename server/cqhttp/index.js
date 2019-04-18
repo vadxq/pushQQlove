@@ -1,14 +1,43 @@
 const CQHttp = require('cqhttp');
+import { getIsOpen, getHong } from '../controls/jx3';
 
 const bot = new CQHttp({
   apiRoot: 'http://127.0.0.1:7187/'
 });
 
 bot.on('message', context => {
-  bot('send_msg', {
+  console.log(context)
+  if (context.post_type === 'message' && context.message_type === 'group') {
+    if (context.message === '开服查询姨妈') {
+      let res = await getIsOpen('ping -c 4 121.14.64.155')
+      let reply = '未开服'
+      if (res) {
+        reply = '已开服'
+      }
+      bot('send_group_msg_async', {
+        group_id: context.group_id,
+        message: reply
+      }).catch(err => { });
+    }
+    if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
+      // 宏
+      let res = await getHong(context.message)
+      let reply = '请输入正确心法'
+      if (res) {
+        reply = context.message + '\n' + res.qixue + '\n' + res.hong
+      }
+      bot('send_group_msg_async', {
+        group_id: context.group_id,
+        message: reply
+      }).catch(err => {});
+    }
+  }
+  if (context.post_type === 'message' && context.message_type === 'private') {
+    bot('send_msg', {
       ...context,
       message: '哈喽～'
-  });
+    });
+  }
 });
 
 bot.on('notice', context => {
