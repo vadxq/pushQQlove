@@ -4,6 +4,25 @@ import mongoose from 'mongoose';
 require('../mongo/schema/jxhong');
 const Jxhong = mongoose.model('Jxhong');
 
+// 新增宏
+export const addHong = async (ctx, next) => {
+  const body = ctx.request.body;
+  const info = new Jxhong(body);
+  const saveInfo = await info.save();
+
+  if (saveInfo) {
+    ctx.body = {
+      status: 1,
+      msg: saveInfo
+    };
+  } else {
+    console.log(changeInfo);
+    ctx.body = {
+      status: 0
+    };
+  };
+}
+
 // 获取宏
 export const getHong = async (ctx, next) => {
   const ele = ctx.query
