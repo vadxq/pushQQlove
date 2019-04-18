@@ -1,5 +1,7 @@
 const CQHttp = require('cqhttp');
 const axios = require('axios');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 // 获取开服查询
 const getIsOpen = async (ele) => {

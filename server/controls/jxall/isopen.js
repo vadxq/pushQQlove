@@ -1,3 +1,6 @@
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
 // 获取开服查询
 export default getIsOpen = async (ele) => {
   const { stdout, stderr } = await exec(ele);
