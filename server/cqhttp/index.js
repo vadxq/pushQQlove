@@ -61,4 +61,4 @@ bot.on('notice', async context => {
   // 忽略其它事件
 });
 
-bot.listen(7188);
+bot.listen(7185);
