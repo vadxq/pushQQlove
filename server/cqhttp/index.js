@@ -33,7 +33,7 @@ bot.on('message', async context => {
       // 宏
       
       let reply = '请输入正确心法'
-      let res = await axios(`http://0.0.0.0:7192/api/accept?sect=${context.message}`)
+      let res = await axios.get(`http://127.0.0.1:7192/api/accept/hong?sect=${context.message}`)
       if (res) {
         reply = context.message + '\n' + res.qixue + '\n' + res.hong
       }
