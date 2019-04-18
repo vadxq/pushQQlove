@@ -35,8 +35,8 @@ export const getHong = async (ele) => {
 
 // 监听消息
 export const postQQMsg = async (ctx, next) => {
-  console.log(ctx.state)
   const body = ctx.request.body;
+  console.log(body)
   if (body) {
     if (body.post_type === 'message' && body.message_type === 'group') {
       if (body.message === '开服查询姨妈') {
