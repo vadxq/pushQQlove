@@ -6,7 +6,7 @@ const Jxhong = mongoose.model('Jxhong');
 
 // 获取宏
 export const getHong = async (ctx, next) => {
-  const ele = ctx.params
+  const ele = ctx.query
   let data = await Jxhong.findOne({sect: ele.sect, dele: false})
   if (data) {
     ctx.body = {

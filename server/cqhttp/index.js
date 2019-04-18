@@ -20,7 +20,6 @@ const bot = new CQHttp({
 });
 
 bot.on('message', async context => {
-  console.log(context)
   if (context.post_type === 'message' && context.message_type === 'group') {
     if (context.message === '开服查询姨妈') {
       let res = await getIsOpen('ping -c 4 121.14.64.155')
@@ -31,11 +30,15 @@ bot.on('message', async context => {
     }
     if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
       // 宏
-      
-      let reply = '请输入正确心法'
-      let res = await axios.get(`http://127.0.0.1:7192/api/accept/hong?sect=${context.message}`)
-      if (res) {
-        reply = context.message + '\n' + res.qixue + '\n' + res.hong
+
+      console.log(context.message)
+      let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + context.message)
+      let reply
+      let res = await axios.get(url)
+      if (res.data.status) {
+        reply = context.message + '\n' + res.data.qixue + '\n' + res.data.hong
+      } else {
+        reply = '请输入正确心法'
       }
       bot('send_group_msg_async', {
         group_id: context.group_id,
