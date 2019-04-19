@@ -61,6 +61,12 @@ bot.on('notice', async context => {
           user_id: context.user_id
       }).then(data => {
           const name = data.nickname || '新人';
+          if (context.group_id === 436976635) {
+            bot('send_group_msg_async', {
+              group_id: context.group_id,
+              message: `欢迎${name}来到酒馆亲友帮~帮会yy39043，可以来yy领个马甲~欢迎常来唠嗑哟~`
+            }).catch(err => { });
+          }
           bot('send_group_msg_async', {
               group_id: context.group_id,
               message: `欢迎${name}～`
