@@ -56,6 +56,14 @@ bot.on('message', async context => {
         message: reply
       }).catch(err => {});
     }
+    if (context.message.length === 1 && (/^[\u8089]/).test(context.message) === true) {
+      let roll = Math.ceil(Math.random()*100)
+      let reply = '你roll到了' + roll + '点。'
+      bot('send_group_msg_async', {
+        group_id: context.group_id,
+        message: reply
+      }).catch(err => {});
+    }
   }
   if (context.post_type === 'message' && context.message_type === 'private') {
     bot('send_msg', {
