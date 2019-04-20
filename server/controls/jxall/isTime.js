@@ -15,6 +15,7 @@ exports.timingTask = class timingTask {
           text: this.data
         }
       }
+      console.log(this.msg)
       await axios.post(`http://0.0.0.0:7187/send_group_msg`, {
         group_id: this.group_id,
         message: this.msg,

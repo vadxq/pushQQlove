@@ -23,7 +23,11 @@ schedule.scheduleJob('16 06 19 * * 2,4', () => {
   timings.postMsg('马上就要开始小攻防排队了哟~~', 436976635)
 })
 
-schedule.scheduleJob('16 38 11,17 * * 6,7', () => {
+schedule.scheduleJob('16 45 17 * * 6,7', () => {
+  timings.postMsg('马上就要开始大攻防排队了哟~~', 436976635)
+})
+
+schedule.scheduleJob('16 45 11 * * 6,7', () => {
   timings.postMsg('马上就要开始大攻防排队了哟~~', 436976635)
 })
 
