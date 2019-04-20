@@ -18,17 +18,17 @@ const getIsOpen = async (ele) => {
 };
 
 // 定时任务
-let timings = new timingTask.timingTask()
+let timings = new timingTask.timingTask('马上就要开始攻防排队了哟~~', 436976635)
 schedule.scheduleJob('16 06 19 * * 2,4', () => {
-  timings.postMsg('马上就要开始小攻防排队了哟~~', 436976635)
+  timings.postMsg()
 })
 
-schedule.scheduleJob('16 45 17 * * 6,7', () => {
-  timings.postMsg('马上就要开始大攻防排队了哟~~', 436976635)
+schedule.scheduleJob('36 53 17 * * 6,7', () => {
+  timings.postMsg()
 })
 
-schedule.scheduleJob('16 45 11 * * 6,7', () => {
-  timings.postMsg('马上就要开始大攻防排队了哟~~', 436976635)
+schedule.scheduleJob('16 40 11 * * 6,7', () => {
+  timings.postMsg()
 })
 
 const bot = new CQHttp({

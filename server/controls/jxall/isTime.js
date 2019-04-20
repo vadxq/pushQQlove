@@ -1,4 +1,4 @@
-
+const axios = require('axios')
 // 排队定时任务
 exports.timingTask = class timingTask {
   constructor(data, group_id) {
