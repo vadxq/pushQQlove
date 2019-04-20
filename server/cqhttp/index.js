@@ -2,6 +2,8 @@ const CQHttp = require('cqhttp');
 const axios = require('axios');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+const timingTask = require('../controls/jxall/isTime');
+const schedule = require('node-schedule');
 
 // 获取开服查询
 const getIsOpen = async (ele) => {
@@ -14,6 +16,16 @@ const getIsOpen = async (ele) => {
     return '已开服'
   }
 };
+
+// 定时任务
+let timings = new timingTask.timingTask()
+schedule.scheduleJob('16 06 19 * * 2,4', () => {
+  timings.postMsg('马上就要开始小攻防排队了哟~~', 436976635)
+})
+
+schedule.scheduleJob('16 38 11,17 * * 6,7', () => {
+  timings.postMsg('马上就要开始大攻防排队了哟~~', 436976635)
+})
 
 const bot = new CQHttp({
   apiRoot: 'http://127.0.0.1:7187/'
