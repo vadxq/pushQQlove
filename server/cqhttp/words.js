@@ -5,13 +5,13 @@ export default class WordsDivid {
   constructor (context) {
     this.context = context
   }
-  init () {
+  async init () {
     if (this.context.message_type === 'group') {
       // 多重判断
       // 数据库设置
       // {
       //   word: '',
-      //   replay: '',
+      //   reply: '',
       //   type: 1// 1,完全匹配直接回复 0，调用函数，2.模糊匹配
       //   isOne: 0 // 特殊群体回复
       //   toWho: [
@@ -26,8 +26,13 @@ export default class WordsDivid {
 
       // 先不做模糊和特殊群体功能，后期再加
       
-      
+      await this.solveGroup()
 
+    } else if (this.context.message_type === 'private') {
+      return {
+        context: this.context,
+        reply: '哈喽～'
+      }
     }
   }
 
@@ -35,20 +40,16 @@ export default class WordsDivid {
     let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context.message)
     let res = await Axios.get(url)
     if (res.data.status) {
-      // let arr = res.data.data
-      // arr.map(e => {
-      //   if (e.type === 0) {
-      //     // 调用函数（主要是开服查询）
-      //   } else if (e.type === 1) {
-
-      //   }
-      // })
-
       let data = res.data.data
       if (data.type === 0) {
+        // 处理函数调用
         this.soleMethod(data)
       } else if (data.type === 1) {
-        
+        // 直接回复数据库内容
+        return {
+          context: this.context,
+          reply: data.reply
+        }
       }
     }
   }
@@ -56,10 +57,10 @@ export default class WordsDivid {
   async soleMethod () {
     if (context.message === '开服查询姨妈') {
       let res = await getIsOpen('ping -c 4 121.14.64.155')
-      bot('send_group_msg_async', {
-        group_id: context.group_id,
-        message: res
-      }).catch(err => { });
+      return {
+        reply: res,
+        context: this.context
+      }
     }
     if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
       // 宏
@@ -72,18 +73,18 @@ export default class WordsDivid {
       } else {
         reply = '请输入正确心法'
       }
-      bot('send_group_msg_async', {
-        group_id: context.group_id,
-        message: reply
-      }).catch(err => {});
+      return {
+        reply: reply,
+        context: this.context
+      }
     }
     if (context.message.length === 1 && (/^[\u8089]/).test(context.message) === true) {
       let roll = Math.ceil(Math.random()*100)
       let reply = '你roll到了' + roll + '点。'
-      bot('send_group_msg_async', {
-        group_id: context.group_id,
-        message: reply
-      }).catch(err => {});
+      return {
+        reply: reply,
+        context: this.context
+      }
     }
   }
 

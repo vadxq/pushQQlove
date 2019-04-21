@@ -2,20 +2,21 @@ const CQHttp = require('cqhttp');
 const axios = require('axios');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const timingTask = require('../controls/jxall/isTime');
 const schedule = require('node-schedule');
+const timingTask = require('../controls/jxall/isTime')
+const wordDivid = require('./words');
 
 // 获取开服查询
-const getIsOpen = async (ele) => {
-  const { stdout, stderr } = await exec(ele);
-  if (stderr) {
-    console.error(`error: ${stderr}`);
-    return '未开服'
-  } else {
-    console.log(`Number of files ${stdout}`);
-    return '已开服'
-  }
-};
+// const getIsOpen = async (ele) => {
+//   const { stdout, stderr } = await exec(ele);
+//   if (stderr) {
+//     console.error(`error: ${stderr}`);
+//     return '未开服'
+//   } else {
+//     console.log(`Number of files ${stdout}`);
+//     return '已开服'
+//   }
+// };
 
 // 定时任务
 let timings = new timingTask.timingTask('马上就要开始攻防排队了哟~~', 436976635)
@@ -36,44 +37,59 @@ const bot = new CQHttp({
 });
 
 bot.on('message', async context => {
-  if (context.post_type === 'message' && context.message_type === 'group') {
-    if (context.message === '开服查询姨妈') {
-      let res = await getIsOpen('ping -c 4 121.14.64.155')
+  // if (context.post_type === 'message' && context.message_type === 'group') {
+  //   if (context.message === '开服查询姨妈') {
+  //     let res = await getIsOpen('ping -c 4 121.14.64.155')
+  //     bot('send_group_msg_async', {
+  //       group_id: context.group_id,
+  //       message: res
+  //     }).catch(err => { });
+  //   }
+  //   if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
+  //     // 宏
+  //     let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + context.message)
+  //     let reply
+  //     let res = await axios.get(url)
+  //     if (res.data.status) {
+  //       reply = context.message + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
+  //       console.log(reply)
+  //     } else {
+  //       reply = '请输入正确心法'
+  //     }
+  //     bot('send_group_msg_async', {
+  //       group_id: context.group_id,
+  //       message: reply
+  //     }).catch(err => {});
+  //   }
+  //   if (context.message.length === 1 && (/^[\u8089]/).test(context.message) === true) {
+  //     let roll = Math.ceil(Math.random()*100)
+  //     let reply = '你roll到了' + roll + '点。'
+  //     bot('send_group_msg_async', {
+  //       group_id: context.group_id,
+  //       message: reply
+  //     }).catch(err => {});
+  //   }
+  // }
+  // if (context.post_type === 'message' && context.message_type === 'private') {
+  //   bot('send_msg', {
+  //     ...context,
+  //     message: '哈喽～'
+  //   });
+  // }
+  if (context.post_type === 'message') {
+    let WordsDivid = new wordDivid.WordsDivid(context)
+    let data = await WordsDivid.init()
+    if (context.message_type === 'private') {
+      bot('send_msg', {
+        ...context,
+        message: data.reply
+      });
+    } else if (context.message_type === 'group') {
       bot('send_group_msg_async', {
         group_id: context.group_id,
-        message: res
-      }).catch(err => { });
-    }
-    if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
-      // 宏
-      let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + context.message)
-      let reply
-      let res = await axios.get(url)
-      if (res.data.status) {
-        reply = context.message + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
-        console.log(reply)
-      } else {
-        reply = '请输入正确心法'
-      }
-      bot('send_group_msg_async', {
-        group_id: context.group_id,
-        message: reply
+        message: data.reply
       }).catch(err => {});
     }
-    if (context.message.length === 1 && (/^[\u8089]/).test(context.message) === true) {
-      let roll = Math.ceil(Math.random()*100)
-      let reply = '你roll到了' + roll + '点。'
-      bot('send_group_msg_async', {
-        group_id: context.group_id,
-        message: reply
-      }).catch(err => {});
-    }
-  }
-  if (context.post_type === 'message' && context.message_type === 'private') {
-    bot('send_msg', {
-      ...context,
-      message: '哈喽～'
-    });
   }
 });
 

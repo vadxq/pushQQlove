@@ -8,7 +8,7 @@ const jxviewSchema = new Schema({
     default: Date.now()
   },
   context: String, // 内容
-  replay: String, // 回复
+  reply: String, // 回复
   isOne: String, // 特殊群体回复
   type: Number, // 1,完全匹配直接回复 0，调用函数，2.模糊匹配
   check: { // 审核
