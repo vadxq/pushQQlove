@@ -4,7 +4,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const schedule = require('node-schedule');
 const timingTask = require('../controls/jxall/isTime')
-const wordDivid = require('./words');
+import { WordsDivid } from './words';
 
 // 获取开服查询
 // const getIsOpen = async (ele) => {
@@ -77,8 +77,8 @@ bot.on('message', async context => {
   //   });
   // }
   if (context.post_type === 'message') {
-    let WordsDivid = new wordDivid.WordsDivid(context)
-    let data = await WordsDivid.init()
+    let wordsDivid = new WordsDivid(context)
+    let data = await wordsDivid.init()
     if (context.message_type === 'private') {
       bot('send_msg', {
         ...context,
