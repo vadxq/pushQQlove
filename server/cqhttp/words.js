@@ -29,8 +29,8 @@ export default class WordsDivid {
   }
 
   async solveGroup () {
-    if ((/^[\u5440][A-Za-z0-9_\-\u4e00-\u9fa5]+/).test(context.message) === true) {
-      let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context.message)
+    if ((/^[\u5440][A-Za-z0-9_\-\u4e00-\u9fa5]+/).test(this.context) === true) {
+      let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context)
       let res = await Axios.get(url)
       if (res.data.status) {
         let data = res.data.data
@@ -48,24 +48,24 @@ export default class WordsDivid {
   }
 
   async soleMethod () {
-    if (context.message === '开服查询姨妈') {
+    if (this.context === '开服查询姨妈') {
       let res = await getIsOpen('ping -c 4 121.14.64.155')
       return res
     }
-    if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
+    if (this.context.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(this.context) === true) {
       // 宏
-      let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + context.message)
+      let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + this.context)
       let reply
       let res = await axios.get(url)
       if (res.data.status) {
-        reply = context.message + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
+        reply = this.context + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
         console.log(reply)
       } else {
         reply = '请输入正确心法'
       }
       return reply
     }
-    if (context.message.length === 1 && (/^[\u8089]/).test(context.message) === true) {
+    if (this.context.length === 1 && (/^[\u8089]/).test(this.context) === true) {
       let roll = Math.ceil(Math.random()*100)
       let reply = '你roll到了' + roll + '点。'
       return reply
