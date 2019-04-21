@@ -6,7 +6,6 @@ export default class WordsDivid {
     this.context = context
   }
   async init () {
-    if (this.context.message_type === 'group') {
       // 多重判断
       // 数据库设置
       // {
@@ -27,40 +26,31 @@ export default class WordsDivid {
       // 先不做模糊和特殊群体功能，后期再加
       
       await this.solveGroup()
-
-    } else if (this.context.message_type === 'private') {
-      return {
-        context: this.context,
-        reply: '哈喽～'
-      }
-    }
   }
 
   async solveGroup () {
-    let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context.message)
-    let res = await Axios.get(url)
-    if (res.data.status) {
-      let data = res.data.data
-      if (data.type === 0) {
-        // 处理函数调用
-        this.soleMethod(data)
-      } else if (data.type === 1) {
-        // 直接回复数据库内容
-        return {
-          context: this.context,
-          reply: data.reply
+    if ((/^[\u5440][A-Za-z0-9_\-\u4e00-\u9fa5]+/).test(context.message) === true) {
+      let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context.message)
+      let res = await Axios.get(url)
+      if (res.data.status) {
+        let data = res.data.data
+        if (data.type === 0) {
+          // 处理函数调用
+          this.soleMethod(data)
+        } else if (data.type === 1) {
+          // 直接回复数据库内容
+          return data.reply
         }
       }
+    } else {
+      await this.soleMethod()
     }
   }
 
   async soleMethod () {
     if (context.message === '开服查询姨妈') {
       let res = await getIsOpen('ping -c 4 121.14.64.155')
-      return {
-        reply: res,
-        context: this.context
-      }
+      return res
     }
     if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
       // 宏
@@ -73,18 +63,12 @@ export default class WordsDivid {
       } else {
         reply = '请输入正确心法'
       }
-      return {
-        reply: reply,
-        context: this.context
-      }
+      return reply
     }
     if (context.message.length === 1 && (/^[\u8089]/).test(context.message) === true) {
       let roll = Math.ceil(Math.random()*100)
       let reply = '你roll到了' + roll + '点。'
-      return {
-        reply: reply,
-        context: this.context
-      }
+      return reply
     }
   }
 

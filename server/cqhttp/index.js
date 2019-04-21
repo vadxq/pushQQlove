@@ -77,17 +77,17 @@ bot.on('message', async context => {
   //   });
   // }
   if (context.post_type === 'message') {
-    let wordsDivid = new WordsDivid(context)
-    let data = await wordsDivid.init()
     if (context.message_type === 'private') {
       bot('send_msg', {
         ...context,
-        message: data.reply
+        message: '哈喽～'
       });
     } else if (context.message_type === 'group') {
+      let wordsDivid = new WordsDivid(context.message)
+      let reply = await wordsDivid.init()
       bot('send_group_msg_async', {
         group_id: context.group_id,
-        message: data.reply
+        message: reply
       }).catch(err => {});
     }
   }
