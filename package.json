@@ -7,7 +7,8 @@
     "start": "nodemon ./server/app.js --exec babel-node",
     "build": "babel ./server/ -d dist",
     "serve": "node dist/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cqhttp": "nodemon ./server/cqhttp/index.js --exec babel-node"
   },
   "repository": {
     "type": "git",

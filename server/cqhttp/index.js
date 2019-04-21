@@ -19,15 +19,15 @@ const getIsOpen = async (ele) => {
 
 // 定时任务
 let timings = new timingTask.timingTask('马上就要开始攻防排队了哟~~', 436976635)
-schedule.scheduleJob('16 06 19 * * 2,4', () => {
+schedule.scheduleJob('16 20 19 * * 2,4', () => {
   timings.postMsg()
 })
 
-schedule.scheduleJob('36 53 17 * * 6,7', () => {
+schedule.scheduleJob('16 50 17 * * 6,7', () => {
   timings.postMsg()
 })
 
-schedule.scheduleJob('16 40 11 * * 6,7', () => {
+schedule.scheduleJob('16 50 11 * * 6,7', () => {
   timings.postMsg()
 })
 

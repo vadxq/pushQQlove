@@ -23,6 +23,8 @@ export default class WordsDivid {
       // }
       // 模糊搜索,查询出多个结果的话，再做选择，先处理0，然后根据type优先匹配完全匹配
       // 没有的话，模糊匹配，最先匹配到跳出，
+
+      // 先不做模糊和特殊群体功能，后期再加
       
       
 
@@ -30,17 +32,70 @@ export default class WordsDivid {
   }
 
   async solveGroup () {
-    let url = encodeURI('http://127.0.0.1:7192/api/accept/view?content=' + this.context.message)
+    let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context.message)
     let res = await Axios.get(url)
     if (res.data.status) {
-      let arr = res.data.data
-      arr.map(e => {
-        if (e.type === 0) {
-          // 调用函数（主要是开服查询）
-        } else if (e.type === 1) {
+      // let arr = res.data.data
+      // arr.map(e => {
+      //   if (e.type === 0) {
+      //     // 调用函数（主要是开服查询）
+      //   } else if (e.type === 1) {
 
-        }
-      })
+      //   }
+      // })
+
+      let data = res.data.data
+      if (data.type === 0) {
+        this.soleMethod(data)
+      } else if (data.type === 1) {
+        
+      }
+    }
+  }
+
+  async soleMethod () {
+    if (context.message === '开服查询姨妈') {
+      let res = await getIsOpen('ping -c 4 121.14.64.155')
+      bot('send_group_msg_async', {
+        group_id: context.group_id,
+        message: res
+      }).catch(err => { });
+    }
+    if (context.message.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(context.message) === true) {
+      // 宏
+      let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + context.message)
+      let reply
+      let res = await axios.get(url)
+      if (res.data.status) {
+        reply = context.message + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
+        console.log(reply)
+      } else {
+        reply = '请输入正确心法'
+      }
+      bot('send_group_msg_async', {
+        group_id: context.group_id,
+        message: reply
+      }).catch(err => {});
+    }
+    if (context.message.length === 1 && (/^[\u8089]/).test(context.message) === true) {
+      let roll = Math.ceil(Math.random()*100)
+      let reply = '你roll到了' + roll + '点。'
+      bot('send_group_msg_async', {
+        group_id: context.group_id,
+        message: reply
+      }).catch(err => {});
+    }
+  }
+
+  // 获取开服查询
+  async getIsOpen (ele) {
+    const { stdout, stderr } = await exec(ele)
+    if (stderr) {
+      console.error(`error: ${stderr}`)
+      return '未开服'
+    } else {
+      console.log(`Number of files ${stdout}`)
+      return '已开服'
     }
   }
 }
