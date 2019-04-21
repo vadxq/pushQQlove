@@ -56,7 +56,7 @@ export default class WordsDivid {
       // 宏
       let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + this.context)
       let reply
-      let res = await axios.get(url)
+      let res = await Axios.get(url)
       if (res.data.status) {
         reply = this.context + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
         console.log(reply)
