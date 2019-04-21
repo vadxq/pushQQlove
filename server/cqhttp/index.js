@@ -84,7 +84,7 @@ bot.on('message', async context => {
       });
     } else if (context.message_type === 'group') {
       let wordsDivid = new WordsDivid(context.message)
-      let reply = await wordsDivid.init()
+      let reply = wordsDivid.init()
       bot('send_group_msg_async', {
         group_id: context.group_id,
         message: reply
