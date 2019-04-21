@@ -1,4 +1,6 @@
 import Axios from "axios";
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 // 群消息处理
 export default class WordsDivid {
@@ -25,15 +27,18 @@ export default class WordsDivid {
 
       // 先不做模糊和特殊群体功能，后期再加
       
-      await this.solveGroup()
+      let reply = await this.solveGroup()
+      return reply
   }
 
   async solveGroup () {
     if ((/^[\u5440][A-Za-z0-9_\-\u4e00-\u9fa5]+/).test(this.context) === true) {
       let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context)
       let res = await Axios.get(url)
+      console.log(res)
       if (res.data.status) {
         let data = res.data.data
+        console.log('data' + data)
         if (data.type === 0) {
           // 处理函数调用
           this.soleMethod(data)
@@ -43,13 +48,14 @@ export default class WordsDivid {
         }
       }
     } else {
-      await this.soleMethod()
+      let data = await this.soleMethod()
+      return data
     }
   }
 
   async soleMethod () {
     if (this.context === '开服查询姨妈') {
-      let res = await getIsOpen('ping -c 4 121.14.64.155')
+      let res = await this.getIsOpen('ping -c 4 121.14.64.155')
       return res
     }
     if (this.context.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(this.context) === true) {
