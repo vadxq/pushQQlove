@@ -4,7 +4,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const schedule = require('node-schedule');
 const timingTask = require('../controls/jxall/isTime')
-import { WordsDivid } from './words';
+import WordsDivid from './words';
 
 // 获取开服查询
 // const getIsOpen = async (ele) => {
