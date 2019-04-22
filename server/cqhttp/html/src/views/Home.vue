@@ -52,7 +52,7 @@
             {{item.context}}
           </a>
           <div class="panel-block">
-            <button class="button is-link is-outlined is-fullwidth">
+            <button class="button is-link is-outlined is-fullwidth" @click="getMoreList()">
               More posts
             </button>
           </div>
@@ -165,36 +165,36 @@ export default {
     return {
       total: 0,
       data: [
-        {
-            "createtime": "2019-04-21T20:44:20.164Z",
-            "check": true,
-            "dele": false,
-            "_id": "5cbd78b207f3eb476754d754",
-            "context": "呀婉言是谁",
-            "reply": "曾经是个七秀，现在是个猪萝",
-            "type": 1,
-            "__v": 0
-        },
-        {
-            "createtime": "2019-04-21T20:44:20.164Z",
-            "check": true,
-            "dele": false,
-            "_id": "5cbcd7f307f3eb476754d752",
-            "context": "呀玺臣是谁",
-            "reply": "咕咕咕~咕咕咕~",
-            "type": 1,
-            "__v": 0
-        },
-        {
-            "createtime": "2019-04-21T20:44:20.164Z",
-            "check": true,
-            "dele": false,
-            "_id": "5cbcd76007f3eb476754d751",
-            "context": "呀奇遇平生心愿",
-            "reply": "奇遇平生心愿\n触发方式\n1.抄书\n2.读碑\n无CD，无前置条件\n奖励：监本",
-            "type": 1,
-            "__v": 0
-        }
+        // {
+        //     "createtime": "2019-04-21T20:44:20.164Z",
+        //     "check": true,
+        //     "dele": false,
+        //     "_id": "5cbd78b207f3eb476754d754",
+        //     "context": "呀婉言是谁",
+        //     "reply": "曾经是个七秀，现在是个猪萝",
+        //     "type": 1,
+        //     "__v": 0
+        // },
+        // {
+        //     "createtime": "2019-04-21T20:44:20.164Z",
+        //     "check": true,
+        //     "dele": false,
+        //     "_id": "5cbcd7f307f3eb476754d752",
+        //     "context": "呀玺臣是谁",
+        //     "reply": "咕咕咕~咕咕咕~",
+        //     "type": 1,
+        //     "__v": 0
+        // },
+        // {
+        //     "createtime": "2019-04-21T20:44:20.164Z",
+        //     "check": true,
+        //     "dele": false,
+        //     "_id": "5cbcd76007f3eb476754d751",
+        //     "context": "呀奇遇平生心愿",
+        //     "reply": "奇遇平生心愿\n触发方式\n1.抄书\n2.读碑\n无CD，无前置条件\n奖励：监本",
+        //     "type": 1,
+        //     "__v": 0
+        // }
       ],
       page: 0,
       pagecontext: '呀',
@@ -246,7 +246,7 @@ export default {
     },
     async postMsg () {
       let postdata = {
-        context: this.msg.front + msg.end, // 内容
+        context: this.msg.front + this.msg.end, // 内容
         reply: this.msg.reply, // 回复
         type: 1, // 1,完全匹配
         username: this.msg.username,
@@ -263,6 +263,7 @@ export default {
   },
   created() {
     this.getMoreList()
+    this.getTotal()
   },
 }
 </script>
