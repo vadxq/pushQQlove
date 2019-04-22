@@ -54,8 +54,12 @@ export default class WordsDivid {
   }
 
   async soleMethod () {
-    if (this.context === '开服查询姨妈') {
+    if (this.context === '开服查询姨妈' || this.context === '开服查询' || this.context === '开服查询 斗转星移') {
       let res = await this.getIsOpen('ping -c 4 121.14.64.155')
+      return res
+    }
+    if (this.context === '签到' || this.context === 'qd') {
+      let res = await this.qdSovle()
       return res
     }
     if (this.context.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(this.context) === true) {
@@ -88,6 +92,10 @@ export default class WordsDivid {
       console.log(`Number of files ${stdout}`)
       return '已开服'
     }
+  }
+
+  async qdSovle () {
+
   }
 }
 // 私聊消息处理

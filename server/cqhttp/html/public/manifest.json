@@ -1,0 +1,13 @@
+{
+  "name": "html",
+  "short_name": "html",
+  "icons": [
+    {
+      "src": "https://qnimg.vadxq.com/blog/2017/logo.jpg"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#4DBA87"
+}

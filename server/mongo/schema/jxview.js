@@ -11,6 +11,8 @@ const jxviewSchema = new Schema({
   reply: String, // 回复
   isOne: String, // 特殊群体回复
   type: Number, // 1,完全匹配直接回复 0，调用函数，2.模糊匹配
+  username: String,
+  userid: Number, // QQ号
   check: { // 审核
     type: Boolean,
     default: false
