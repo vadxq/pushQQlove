@@ -64,6 +64,16 @@
       </nav>
     
       <router-view/>
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>PQQL</strong> by <a href="https://github.com/vadxq">vadxq(github)</a>.
+          </p>
+          <p>
+            <a href="https://blog.vadxq.com">vadxq' Blog</a>
+          </p>
+        </div>
+      </footer>
     </div>
   </div>
 </template>
@@ -101,5 +111,8 @@ export default {
 * {
   margin: 0;
   padding: 0;
+}
+.footer {
+  padding: 1rem 0;
 }
 </style>

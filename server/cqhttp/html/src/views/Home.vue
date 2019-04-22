@@ -51,7 +51,7 @@
             </span>
             {{item.context}}
           </a>
-          <div class="panel-block">
+          <div class="panel-block" v-if="isHasMore">
             <button class="button is-link is-outlined is-fullwidth" @click="getMoreList()">
               More posts
             </button>
@@ -138,6 +138,8 @@
               <br>
               <!-- <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> -->
               提供者：{{activeItem.username}}
+              <br>
+              审核结果：<span v-if="activeItem.check">审核通过</span><span v-if="!activeItem.check">待审核</span>
             </div>
           </div>
           <footer class="card-footer">
@@ -148,12 +150,17 @@
         </div>
       </div>
     </div>
+
+    <div v-if="errMsg" class="notification" id="errordiv">
+      {{errMsg}}
+    </div>
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
 import axios from 'axios'
+import { setTimeout } from 'timers';
 // import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
@@ -165,36 +172,6 @@ export default {
     return {
       total: 0,
       data: [
-        // {
-        //     "createtime": "2019-04-21T20:44:20.164Z",
-        //     "check": true,
-        //     "dele": false,
-        //     "_id": "5cbd78b207f3eb476754d754",
-        //     "context": "呀婉言是谁",
-        //     "reply": "曾经是个七秀，现在是个猪萝",
-        //     "type": 1,
-        //     "__v": 0
-        // },
-        // {
-        //     "createtime": "2019-04-21T20:44:20.164Z",
-        //     "check": true,
-        //     "dele": false,
-        //     "_id": "5cbcd7f307f3eb476754d752",
-        //     "context": "呀玺臣是谁",
-        //     "reply": "咕咕咕~咕咕咕~",
-        //     "type": 1,
-        //     "__v": 0
-        // },
-        // {
-        //     "createtime": "2019-04-21T20:44:20.164Z",
-        //     "check": true,
-        //     "dele": false,
-        //     "_id": "5cbcd76007f3eb476754d751",
-        //     "context": "呀奇遇平生心愿",
-        //     "reply": "奇遇平生心愿\n触发方式\n1.抄书\n2.读碑\n无CD，无前置条件\n奖励：监本",
-        //     "type": 1,
-        //     "__v": 0
-        // }
       ],
       page: 0,
       pagecontext: '呀',
@@ -212,7 +189,9 @@ export default {
         reply: null,
         username: null,
         userid: null
-      }
+      },
+      isHasMore: true,
+      errMsg: null
     }
   },
   methods: {
@@ -225,14 +204,24 @@ export default {
       }
     },
     async getTotal () {
-      this.total = await axios.get('/api/accept/totalview')
+      let res = await axios.get('https://qq.vadxq.com/api/accept/totalview')
+      if (res.data.status) {
+        this.total = res.data.data
+      } else {
+        this.getErrMsg(res.data.data)
+      }
     },
     async getMoreList () {
-      let url = encodeURI(`/api/accept/allview?page=${this.page}&context=${this.pagecontext}`)
+      let url = encodeURI(`https://qq.vadxq.com/api/accept/allview?page=${this.page}&context=${this.pagecontext}`)
       let res = await axios.get(url)
       if (res.data.status) {
         this.page += 1
-        this.data.push(res.data.data)
+        this.data = this.data.concat(res.data.data)
+        if(res.data.data.length < 7) {
+          this.isHasMore = false
+        }
+      } else {
+        this.getErrMsg(res.data.data)
       }
     },
     async openDetail(e) {
@@ -252,13 +241,25 @@ export default {
         username: this.msg.username,
         userid: this.msg.userid, // QQ号
       }
-      let res = await axios.post('/api/accept/view', postdata)
-      if (res.data.status) {
-        this.changeShow('#newPostModel')
-        this.page = 0
-        this.data = []
-        this.getMoreList()
+      if (postdata.context && postdata.reply && postdata.username && postdata.userid) {
+        let res = await axios.post('https://qq.vadxq.com/api/accept/view', postdata)
+        if (res.data.status) {
+          this.changeShow('#newPostModel')
+          this.page = 0
+          this.data = []
+          this.getMoreList()
+        } else {
+          this.getErrMsg(res.data.data)
+        }
+      } else {
+        this.getErrMsg('请填写完整~')
       }
+    },
+    getErrMsg (e) {
+      this.errMsg = e
+      setTimeout(() => {
+        this.errMsg = false
+      }, 5000);
     }
   },
   created() {
@@ -284,5 +285,12 @@ export default {
   width: 100%;
   margin: 3vh 0;
   display: flex;
+}
+
+#errordiv {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 </style>
