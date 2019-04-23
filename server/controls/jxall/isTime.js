@@ -1,6 +1,6 @@
-const axios = require('axios')
+import axios from 'axios'
 // 排队定时任务
-exports.timingTask = class timingTask {
+export default class timingTask {
   constructor(data, group_id) {
     this.data = data
     this.group_id = group_id
