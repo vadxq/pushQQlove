@@ -5,6 +5,7 @@ import schedule from 'node-schedule'
 // 定时任务
 export default class scheduleTime {
   constructor () {
+    // this.init()
   }
 
   async init () {
@@ -32,10 +33,16 @@ export default class scheduleTime {
   }
 
   async postHackTime () {
-    schedule.scheduleJob('10 01 04 * * *', () => {
+    schedule.scheduleJob('10 18 04 * * *', () => {
       this.postHacknews('newstories')
     })
-    schedule.scheduleJob('59 10 04 * * *', () => {
+    schedule.scheduleJob('59 20 04 * * *', () => {
+      this.postHacknews('topstories')
+    })
+    schedule.scheduleJob('10 25 04 * * *', () => {
+      this.postHacknews('newstories')
+    })
+    schedule.scheduleJob('59 30 04 * * *', () => {
       this.postHacknews('topstories')
     })
   }
@@ -49,7 +56,9 @@ export default class scheduleTime {
       hacknewdata.map(x => {
         data += `\n${x.title} by ${x.by}\n ${x.url}\n`
       })
+      console.log('postHacknews')
       data = `Hack News ${x} ${time}\n` + data
+      console.log(data)
       let timings = new timingTask(data, 894815833)
       timings.postMsg()
   }
