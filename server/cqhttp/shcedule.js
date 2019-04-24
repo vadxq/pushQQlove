@@ -32,7 +32,7 @@ export default class scheduleTime {
   }
 
   async postHackTime () {
-    schedule.scheduleJob('10 59 12 * * *', () => {
+    schedule.scheduleJob('10 30 13 * * *', () => {
       this.postHacknews('newstories')
     })
     schedule.scheduleJob('59 59 21 * * *', () => {
@@ -52,7 +52,7 @@ export default class scheduleTime {
       })
       console.log(data)
       data = `Hack News ${x} ${time}\n` + data
-      let timings = new timingTask(data, 825660435)
+      let timings = new timingTask(data, 894815833)
       timings.postMsg()
   }
 }
