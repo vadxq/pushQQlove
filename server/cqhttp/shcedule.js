@@ -32,10 +32,10 @@ export default class scheduleTime {
   }
 
   async postHackTime () {
-    schedule.scheduleJob('10 40 03 * * *', () => {
+    schedule.scheduleJob('10 01 04 * * *', () => {
       this.postHacknews('newstories')
     })
-    schedule.scheduleJob('59 50 03 * * *', () => {
+    schedule.scheduleJob('59 10 04 * * *', () => {
       this.postHacknews('topstories')
     })
   }
