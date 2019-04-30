@@ -17,7 +17,7 @@ bot.on('message', async context => {
         message: '哈喽～'
       });
     } else if (context.message_type === 'group') {
-      let wordsDivid = new WordsDivid(context.message)
+      let wordsDivid = new WordsDivid(context.message, context.user_id, context.group_id)
       let reply = await wordsDivid.init()
       console.log(context)
       bot('send_group_msg_async', {

@@ -15,7 +15,7 @@ const jxviewSchema = new Schema({
   userid: Number, // QQ号
   check: { // 审核
     type: Boolean,
-    default: false
+    default: true
   },
   dele: {
     type: Boolean, // 删除状态

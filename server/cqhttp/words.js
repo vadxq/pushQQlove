@@ -4,8 +4,10 @@ const exec = util.promisify(require('child_process').exec);
 
 // 群消息处理
 export default class WordsDivid {
-  constructor (context) {
+  constructor (context, user_id, group_id) {
     this.context = context
+    this.user_id = user_id
+    this.group_id = group_id
   }
   async init () {
       // 多重判断
@@ -95,7 +97,17 @@ export default class WordsDivid {
   }
 
   async qdSovle () {
-
+    // sign in 签到
+    console.log(this.user_id, this.user_id)
+    // 修改roll点
+    // 修改签到修为
+    // 算法
+    // 奇遇点在与相差点数
+    let postData = {
+      user_id: this.user_id,
+      group_id: this.group_id
+    }
+    let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
   }
 }
 // 私聊消息处理
