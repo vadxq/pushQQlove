@@ -108,6 +108,9 @@ export default class WordsDivid {
       group_id: this.group_id
     }
     let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
+    if (res.data.status) {
+      
+    }
   }
 }
 // 私聊消息处理
