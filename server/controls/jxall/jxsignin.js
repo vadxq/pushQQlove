@@ -7,6 +7,22 @@ export const addJxsignin = async (ctx, next) => {
   const body = ctx.request.body;
   let data = await Jxsignin.findOne({user_id: body.user_id, dele: false, group_id: body.group_id})
   if (data) {
+    let nowDate = new Date()
+    let today = `${nowDate.getFullYear}-${nowDate.getMonth + 1}-${nowDate.getDate()}`
+    if (today === data.day) {
+      let getListDatail = getList()
+      if (getListDatail) {
+        ctx.body = {
+          status: 1,
+          data: `[CQ:at,qq=${data.user_id}]你今天以及修炼过啦，当前修为值${data.boom},排名${getListDatail}位`
+        }
+      } else {
+        ctx.body = {
+          status: 0,
+          data: '查询失败'
+        }
+      }
+    }
     let newroll = Math.ceil(Math.random()*100)
     let getroll = Math.abs(newroll - data.roll)
     let newboom = {
@@ -103,3 +119,14 @@ export const jxRoll = async (ctx, next) => {
 //     }
 //   }
 // }
+
+
+// get 排名
+const getList = async (group_id, user_id) => {
+  let data = await Jxsignin.find({group_id: group_id}, {sort:{boom: -1 }})
+  if (data) {
+    return data.indexOf(user_id) + 1
+  } else {
+    return false
+  }
+}

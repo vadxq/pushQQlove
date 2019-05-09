@@ -37,10 +37,10 @@ export default class WordsDivid {
     if ((/^[\u5440][A-Za-z0-9_\-\u4e00-\u9fa5]+/).test(this.context) === true) {
       let url = encodeURI('http://127.0.0.1:7192/api/accept/view?context=' + this.context)
       let res = await Axios.get(url)
-      console.log(res)
+      // console.log(res)
       if (res.data.status) {
         let data = res.data.data
-        console.log('data' + data)
+        // console.log('data' + data)
         if (data.type === 0) {
           // 处理函数调用
           this.soleMethod(data)
@@ -71,7 +71,7 @@ export default class WordsDivid {
       let res = await Axios.get(url)
       if (res.data.status) {
         reply = this.context + '\n' + res.data.data.qixue + '\n' + res.data.data.hong
-        console.log(reply)
+        // console.log(reply)
       } else {
         reply = '请输入正确心法'
       }
@@ -79,7 +79,15 @@ export default class WordsDivid {
     }
     if (this.context.length === 1 && (/^[\u8089]/).test(this.context) === true) {
       let roll = Math.ceil(Math.random()*100)
-      let reply = '你roll到了' + roll + '点。'
+      let reply = `[CQ:at,qq=${this.user_id}] 你roll到了${roll}点。`
+      return reply
+    }
+    if (this.context.length > 2 && (/^[\u4e00-\u9fa5]+[\u5206\u6570]$/).test(this.context) === true) {
+      let roll = Math.ceil(Math.random()*100)
+      if (roll<60) {
+        roll += 30
+      }
+      let reply = `[CQ:at,qq=${this.user_id}] 恭喜你，你的考试${this.context}将获得${roll}分。`
       return reply
     }
   }

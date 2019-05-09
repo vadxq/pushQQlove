@@ -19,7 +19,7 @@ bot.on('message', async context => {
     } else if (context.message_type === 'group') {
       let wordsDivid = new WordsDivid(context.message, context.user_id, context.group_id)
       let reply = await wordsDivid.init()
-      console.log(context)
+      // console.log(context)
       bot('send_group_msg_async', {
         group_id: context.group_id,
         message: reply
@@ -54,6 +54,27 @@ bot.on('notice', async context => {
       });
   }
   // 忽略其它事件
+});
+
+bot.on('request', context => {
+  if (context.request_type === 'group') {
+      // 处理加群请求
+      if (context.sub_type === 'invite') {
+        bot('set_group_add_request', {
+          flag: context.flag,
+          sub_type: 'invite',
+          approve: true
+        }).catch(err => { });
+      }
+  }
+  if (context.request_type === 'friend') {
+    // 处理加好友请求
+    bot('set_friend_add_request', {
+      flag: context.flag,
+      approve: true
+    }).catch(err => { });
+  }
+  // 忽略其它类型的请求
 });
 
 bot.listen(7185);

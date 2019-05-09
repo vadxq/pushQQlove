@@ -12,7 +12,7 @@ const jxsigninSchema = new Schema({
   group_id: Number, // 群hao
   user_id: Number, // QQ号
   boom: Number, // xiuwei
-  day: String, // 最后签到天数
+  day: String, // 最后签到日期
   dele: {
     type: Boolean, // 删除状态
     default: false
