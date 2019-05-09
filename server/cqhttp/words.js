@@ -117,7 +117,7 @@ export default class WordsDivid {
     }
     let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
     if (res.data.status) {
-      
+      return '还在开发中'
     }
   }
 }

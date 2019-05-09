@@ -1,6 +1,6 @@
 import timingTask from '../controls/jxall/isTime'
-import hackNews from '../controls/code/hacknews'
 import schedule from 'node-schedule'
+import axios from 'axios'
 
 // 定时任务
 export default class scheduleTime {
@@ -33,23 +33,20 @@ export default class scheduleTime {
   }
 
   async postHackTime () {
-    schedule.scheduleJob('10 18 04 * * *', () => {
+    schedule.scheduleJob('10 25 07 * * *', () => {
       this.postHacknews('newstories')
     })
-    schedule.scheduleJob('59 20 04 * * *', () => {
-      this.postHacknews('topstories')
-    })
-    schedule.scheduleJob('10 25 04 * * *', () => {
-      this.postHacknews('newstories')
-    })
-    schedule.scheduleJob('59 30 04 * * *', () => {
+    schedule.scheduleJob('59 30 22 * * *', () => {
       this.postHacknews('topstories')
     })
   }
 
   async postHacknews (x) {
-      let hacknews = new hackNews()
-      let hacknewdata = await hacknews.init(x)
+    let url = encodeURI('https://proxy.imissu.top/hacknews/' + x)
+    let res = await axios.get(url)
+    // console.log(res)
+    if (res.status) {
+      let hacknewdata = res.data
       let data = ''
       let date = new Date()
       let time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
@@ -61,5 +58,7 @@ export default class scheduleTime {
       console.log(data)
       let timings = new timingTask(data, 894815833)
       timings.postMsg()
+    }
+      
   }
 }
