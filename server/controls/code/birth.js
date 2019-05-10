@@ -8,12 +8,14 @@ export default class getBirth {
 
   async init() {
     let list = await this.getBirthList()
-    for (let i = 0; i < list.length; i++) {
-      this.username = this.username + list[i].truename + ' '
+    if (list) {
+      for (let i = 0; i < list.length; i++) {
+        this.username = this.username + list[i].truename + ' '
+      }
+      console.log(this.username)
+      let reply = `今天是家园人${this.username}破壳诞生之日，让我们一起为他们庆祝！生日快乐~`
+      return reply
     }
-    console.log(this.username)
-    let reply = `今天是家园人${this.username}破壳诞生之日，让我们一起为他们庆祝！生日快乐~`
-    return reply
   }
 
   // get Hacknews list
@@ -22,10 +24,9 @@ export default class getBirth {
       let data = await axios.get(`https://us.ncuhomer.cn/api/user/birth`)
       if (data.status === 200) {
         let res = data.data
-        // console.log(res)
-        return res
-      } else {
-        return 
+        if (res) {
+          return res
+        }
       }
     } catch (error) {
       console.error(error)

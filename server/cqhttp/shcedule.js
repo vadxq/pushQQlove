@@ -2,6 +2,7 @@ import timingTask from '../controls/jxall/isTime'
 import getBirth from '../controls/code/birth'
 import schedule from 'node-schedule'
 import axios from 'axios'
+import getItnews from '../controls/code/itnews'
 
 // 定时任务
 export default class scheduleTime {
@@ -13,6 +14,7 @@ export default class scheduleTime {
     this.gongfan()
     this.postHackTime()
     this.postBirth()
+    this.postItnews()
   }
 
   async gongfan () {
@@ -48,6 +50,17 @@ export default class scheduleTime {
     schedule.scheduleJob('11 00 00 * * *', () => {
       let data = getBirthList.init()
       console.log(data)
+      let timings = new timingTask(data, 451189169)
+      timings.postMsg()
+    })
+  }
+
+  async postItnews () {
+    let getItnewsList = new getItnews()
+    schedule.scheduleJob('11 00 08 * * *', () => {
+      let data = getItnewsList.init()
+      data = '早日科技新闻\n' + data
+      // console.log(data)
       let timings = new timingTask(data, 451189169)
       timings.postMsg()
     })

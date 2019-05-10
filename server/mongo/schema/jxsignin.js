@@ -8,7 +8,10 @@ const jxsigninSchema = new Schema({
     default: Date.now()
   },
   context: String, // 内容
-  roll: String, // 回复
+  roll: {
+    type: String, // rol状态
+    default: '0'
+  },
   group_id: Number, // 群hao
   user_id: Number, // QQ号
   boom: {
@@ -24,10 +27,7 @@ const jxsigninSchema = new Schema({
 
 jxsigninSchema.pre('save', function (next) {
   let nowDate = new Date()
-  let month = nowDate.getMonth + 1
-  let year = nowDate.getFullYear
-  let day = nowDate.getDate()
-  this.day =  year + '-' + month + '-' + day
+  this.day = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
   next()
 })
 
@@ -35,10 +35,7 @@ jxsigninSchema.pre('update', function () {
   if (this.roll) {
   } else {
     let nowDate = new Date()
-    let month = nowDate.getMonth + 1
-    let year = nowDate.getFullYear
-    let day = nowDate.getDate()
-    this.day =  year + '-' + month + '-' + day
+    this.day = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
   }
   next()
 });

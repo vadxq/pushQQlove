@@ -83,6 +83,12 @@ export default class WordsDivid {
       if (this.user_id === 862235971 | this.user_id === 1044689145) {
         reply = `你roll到了99点。\n[CQ:at,qq=${this.user_id}]`
       }
+      let postdata = {
+        roll: roll,
+        user_id: this.user_id,
+        group_id: this.group_id
+      }
+      Axios.post('http://127.0.0.1:7192/api/accept/jxsignroll', postdata)
       return reply
     }
     if (this.context.length > 2 && (/^[\u4e00-\u9fa5]+[\u5206\u6570]$/).test(this.context) === true) {
@@ -112,7 +118,7 @@ export default class WordsDivid {
 
   async qdSovle () {
     // sign in 签到
-    console.log(this.user_id, this.user_id)
+    console.log(this.user_id, this.group_id)
     // 修改roll点
     // 修改签到修为
     // 算法
