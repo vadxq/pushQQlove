@@ -79,7 +79,10 @@ export default class WordsDivid {
     }
     if (this.context.length === 1 && (/^[\u8089]/).test(this.context) === true) {
       let roll = Math.ceil(Math.random()*100)
-      let reply = `[CQ:at,qq=${this.user_id}] 你roll到了${roll}点。`
+      let reply = `你roll到了${roll}点。\n[CQ:at,qq=${this.user_id}]`
+      if (this.user_id === 862235971 | this.user_id === 1044689145) {
+        reply = `你roll到了99点。\n[CQ:at,qq=${this.user_id}]`
+      }
       return reply
     }
     if (this.context.length > 2 && (/^[\u4e00-\u9fa5]+[\u5206\u6570]$/).test(this.context) === true) {
@@ -87,7 +90,10 @@ export default class WordsDivid {
       if (roll<60) {
         roll += 30
       }
-      let reply = `[CQ:at,qq=${this.user_id}] 恭喜你，你的考试${this.context}将获得${roll}分。`
+      let reply = `恭喜你，你的考试${this.context}将获得${roll}分。\n[CQ:at,qq=${this.user_id}]`
+      if (this.user_id === 862235971 | this.user_id === 1044689145) {
+        reply = `恭喜你，你的考试${this.context}将获得99分。\n[CQ:at,qq=${this.user_id}]`
+      }
       return reply
     }
   }
@@ -117,7 +123,8 @@ export default class WordsDivid {
     }
     let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
     if (res.data.status) {
-      return '还在开发中'
+      console.log(res.data+ 'qdsovle')
+      return res.data.data
     }
   }
 }

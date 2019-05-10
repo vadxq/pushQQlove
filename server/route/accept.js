@@ -5,6 +5,7 @@ import {
   getAllJxview,
   getTotalJxview
 } from '../controls/jxall/jxview'
+import { addJxsignin } from '../controls/jxall/jxsignin'
 
 const acceptRouter = require('koa-router')();
 
@@ -14,6 +15,7 @@ acceptRouter
   .get('/view', getJxview)
   .post('/view', addJxview)
   .get('/allview', getAllJxview)
-  .get('/totalview', getTotalJxview);
+  .get('/totalview', getTotalJxview)
+  .post('/jxsignin', addJxsignin);
 
 module.exports = acceptRouter;

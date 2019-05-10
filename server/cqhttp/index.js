@@ -14,7 +14,7 @@ bot.on('message', async context => {
     if (context.message_type === 'private') {
       bot('send_msg', {
         ...context,
-        message: '哈喽～'
+        message: 'hi~小可爱\n你可以随意加机器人去你们想要玩的群哟，完全免费，具体可以去定制功能页面https://qq.vadxq.com查看。\n如果觉得好玩，有能力的参与捐赠，记得留名哟嘻嘻(捐赠功能也在那个页面)\n这个最初版(v1.0.0)是为了给情缘缘推送每日早安天气的，后来发展成群功能了，后续会增加更多有趣功能\n在这感谢我最最最可爱的缘缘~'
       });
     } else if (context.message_type === 'group') {
       let wordsDivid = new WordsDivid(context.message, context.user_id, context.group_id)
