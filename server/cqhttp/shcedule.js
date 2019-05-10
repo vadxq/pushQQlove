@@ -12,6 +12,7 @@ export default class scheduleTime {
   async init () {
     this.gongfan()
     this.postHackTime()
+    this.postBirth()
   }
 
   async gongfan () {
@@ -44,9 +45,10 @@ export default class scheduleTime {
 
   async postBirth () {
     let getBirthList = new getBirth()
-    schedule.scheduleJob('01 01 00 * * *', () => {
-      let data = getBirthList().init()
-      let timings = new timingTask(data, 894815833)
+    schedule.scheduleJob('11 00 00 * * *', () => {
+      let data = getBirthList.init()
+      console.log(data)
+      let timings = new timingTask(data, 451189169)
       timings.postMsg()
     })
   }

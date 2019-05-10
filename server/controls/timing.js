@@ -38,7 +38,7 @@ export default class timingTask {
           img: msg[1].data.file
         }
         let mongodata = await axios.post('http://127.0.0.1:7192/api/info', data)
-        console.log(mongodata)
+        // console.log(mongodata)
       } else {
         return 
       }
