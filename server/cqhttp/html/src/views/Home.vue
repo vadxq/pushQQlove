@@ -2,7 +2,10 @@
   <section class="home">
     <div class="container is-fulld">
       <div class="notification">
-        This is a project about <strong>PQQL</strong> with nodejs.
+        <p>This is a project about <strong>PQQL</strong> with nodejs.</p>
+        <p>hi~小可爱!你可以随意加机器人去你们想要玩的群哟，完全免费!如果觉得好玩，有能力可以参与捐赠，记得留名哟嘻嘻(捐赠功能也在那个页面)
+        <p>这个最初版(v1.0.0)是为了给情缘缘推送每日早安天气的，后来发展成群功能了，目前是v2.0版本，后续会增加更多有趣功能。</p>
+        <p>在这感谢我最最最可爱的缘缘~</p>
       </div>
       <!-- Main container -->
       <nav class="level">

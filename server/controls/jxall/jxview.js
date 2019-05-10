@@ -5,13 +5,14 @@ const Jxview = mongoose.model('Jxview');
 // 新增关键词
 export const addJxview = async (ctx, next) => {
   const body = ctx.request.body;
-  let data = await Jxview.findOne({context: body.context, dele: false, check: true})
+  let data = await Jxview.findOne({context: body.context, dele: false})
   if (data) {
     ctx.body = {
       status: 0,
       data: '已存在'
     }
   } else {
+    body.check = true
     const info = new Jxview(body);
     const saveInfo = await info.save();
   
