@@ -80,7 +80,7 @@ const getSign = (roll) => {
     num: 120,
     context: '你的修为增加了120。'
   }
-  newboom.num += roll
+  newboom.num = newboom.num + +roll
   newboom.num += Math.ceil(Math.random()*10)
   newboom.context = `你的修为增加了${newboom.num}。`
   if(getroll === 0) {
