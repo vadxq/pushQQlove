@@ -26,7 +26,7 @@ export const addJxsignin = async (ctx, next) => {
       }
     } else {
       // 签到获取
-      let newboom = await getSign(data.roll)
+      let newboom = await getSign(data.roll, data.context)
       body.boom = newboom.num
       body.context += newboom.context
       body.day = today
@@ -45,7 +45,7 @@ export const addJxsignin = async (ctx, next) => {
     }
   } else {
     // 新增
-    let newboom = await getSign()
+    let newboom = await getSign(0, '')
     let nowDate = getLocalTime(8)
     let today = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
 

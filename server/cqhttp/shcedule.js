@@ -15,7 +15,7 @@ export default class scheduleTime {
     this.postHackTime()
     this.postBirth()
     this.postItnews()
-    // this.postLastDay()
+    this.postLastDay()
   }
 
   async gongfan () {
@@ -86,16 +86,23 @@ export default class scheduleTime {
     }
   }
 
-  // async postLastDay () {
-  //   let arrayList = [
-  //     {
-  //       time: '',
-  //       context: ''
-  //     }
-  //   ]
-  //   for (let i = 0; i < arrayList.length; i++) {
-  //     const element = arrayList[i]
-      
-  //   }
-  // }
+  async postLastDay () {
+    let arrayList = [
+      {
+        time: '11 00 09 12 5 *',
+        context: '今天是耿一琪拍毕业照的时间啦！让我们一起祝福她~一琪同学，毕业快乐哟~'
+      },
+      {
+        time: '11 00 09 23 5 *',
+        context: '今天是马英东拍毕业照的时间啦！让我们一起祝福她~英东同学，毕业快乐哟~'
+      }
+    ]
+    for (let i = 0; i < arrayList.length; i++) {
+      const ele = arrayList[i]
+      schedule.scheduleJob(ele.time, () => {
+        let timings = new timingTask(ele.context, 1026792589)
+        timings.postMsg()
+      })
+    }
+  }
 }
