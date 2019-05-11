@@ -15,6 +15,7 @@ export default class scheduleTime {
     this.postHackTime()
     this.postBirth()
     this.postItnews()
+    // this.postLastDay()
   }
 
   async gongfan () {
@@ -84,4 +85,17 @@ export default class scheduleTime {
       timings.postMsg()
     }
   }
+
+  // async postLastDay () {
+  //   let arrayList = [
+  //     {
+  //       time: '',
+  //       context: ''
+  //     }
+  //   ]
+  //   for (let i = 0; i < arrayList.length; i++) {
+  //     const element = arrayList[i]
+      
+  //   }
+  // }
 }

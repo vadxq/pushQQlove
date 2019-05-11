@@ -27,8 +27,11 @@ export const addJxsignin = async (ctx, next) => {
     } else {
       // 签到获取
       let newboom = await getSign(data.roll)
+      let nowDate = new Date()
+      let today = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
       body.boom = newboom.num
       body.context += newboom.context
+      body.day = today
       let res = await postSign(body)
       if (res.status) {
         ctx.body = {
