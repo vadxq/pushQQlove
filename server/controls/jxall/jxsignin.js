@@ -48,7 +48,7 @@ export const addJxsignin = async (ctx, next) => {
     let newboom = await getSign()
     let nowDate = getLocalTime(8)
     let today = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
-    
+
     body.boom = newboom.num
     body.context = newboom.context
     body.day = today
@@ -106,7 +106,8 @@ const getSign = (roll) => {
 const postSign = async (newboom) => {
   let data = await Jxsignin.findOneAndUpdate({user_id: newboom.user_id, group_id: newboom.group_id}, {$set: {
     boom: newboom.boom,
-    context: newboom.context
+    context: newboom.context,
+    day: newboom.day
   }}, {multi: false});
   if (data) {
     return {
