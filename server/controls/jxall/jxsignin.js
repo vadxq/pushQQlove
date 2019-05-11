@@ -9,7 +9,7 @@ export const addJxsignin = async (ctx, next) => {
   // 是否有记录
   if (data) {
     // 是，则看今天是否签到过
-    let nowDate = new Date()
+    let nowDate = getLocalTime(8)
     let today = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
     if (today == data.day) {
       let getListDatail = await getList(body.group_id, body.user_id)
@@ -27,8 +27,6 @@ export const addJxsignin = async (ctx, next) => {
     } else {
       // 签到获取
       let newboom = await getSign(data.roll)
-      let nowDate = new Date()
-      let today = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
       body.boom = newboom.num
       body.context += newboom.context
       body.day = today
@@ -48,8 +46,12 @@ export const addJxsignin = async (ctx, next) => {
   } else {
     // 新增
     let newboom = await getSign()
+    let nowDate = getLocalTime(8)
+    let today = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
+    
     body.boom = newboom.num
     body.context = newboom.context
+    body.day = today
 
     const info = new Jxsignin(body)
     const saveInfo = await info.save();
@@ -149,4 +151,16 @@ export const postRoll = async (ctx, next) => {
       status: 0
     }
   }
+}
+
+const getLocalTime = function (i) {
+  if (typeof i !== 'number') return;
+  var d = new Date();
+  //得到1970年一月一日到现在的秒数
+  var len = d.getTime();
+  //本地时间与GMT时间的时间偏移差
+  var offset = d.getTimezoneOffset() * 60000;
+  //得到现在的格林尼治时间
+  var utcTime = len + offset;
+  return new Date(utcTime + 3600000 * i);
 }

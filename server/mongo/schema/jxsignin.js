@@ -25,11 +25,11 @@ const jxsigninSchema = new Schema({
   }
 });
 
-jxsigninSchema.pre('save', function (next) {
-  let nowDate = new Date()
-  this.day = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
-  next()
-})
+// jxsigninSchema.pre('save', function (next) {
+//   let nowDate = new Date()
+//   this.day = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
+//   next()
+// })
 
 // jxsigninSchema.pre('update', function () {
 //   if (this.roll) {

@@ -13,8 +13,10 @@ export default class getBirth {
         this.username = this.username + list[i].truename + ' '
       }
       console.log(this.username)
-      let reply = `今天是家园人${this.username}破壳诞生之日，让我们一起为他们庆祝！生日快乐~`
-      return reply
+      if (this.username) {
+        let reply = `今天是家园人${this.username}破壳诞生之日，让我们一起为他们庆祝！生日快乐~`
+        return reply
+      }
     }
   }
 
