@@ -47,8 +47,8 @@ export default class scheduleTime {
 
   async postBirth () {
     let getBirthList = new getBirth()
+    let data = await getBirthList.init()
     schedule.scheduleJob('11 00 00 * * *', () => {
-      let data = getBirthList.init()
       console.log(data)
       let timings = new timingTask(data, 451189169)
       timings.postMsg()
@@ -57,10 +57,9 @@ export default class scheduleTime {
 
   async postItnews () {
     let getItnewsList = new getItnews()
+    let data = await getItnewsList.init()
     schedule.scheduleJob('11 00 08 * * *', () => {
-      let data = getItnewsList.init()
-      data = '早日科技新闻\n' + data
-      // console.log(data)
+      console.log(data)
       let timings = new timingTask(data, 451189169)
       timings.postMsg()
     })

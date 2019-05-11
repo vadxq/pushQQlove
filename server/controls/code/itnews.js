@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default class getItnews {
   constructor() {
-    this.data = ''
+    this.data = '早日科技新闻\n'
     // this.init();
   }
 
@@ -12,7 +12,10 @@ export default class getItnews {
     if (list) {
       for (let i = 0; i < list.length; i++) {
         // this.data.push(list[i].title)
-        this.data += `${list[i].title}\n`
+        if (list[i].lapinid) {
+        } else {
+          this.data += `${list[i].title}\n`
+        }
       }
       console.log(this.data)
       return this.data
