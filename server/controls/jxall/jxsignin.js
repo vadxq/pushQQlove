@@ -26,8 +26,8 @@ export const addJxsignin = async (ctx, next) => {
       }
     } else {
       // 签到获取
-      let newboom = await getSign(data.roll, data.context)
-      body.boom = newboom.num
+      let newboom = await getSign(+data.roll, data.context)
+      body.boom = data.boom + newboom.num
       body.context += newboom.context
       body.day = today
       let res = await postSign(body)
@@ -77,10 +77,9 @@ const getSign = (roll) => {
   let newroll = Math.ceil(Math.random()*100)
   let getroll = Math.abs(newroll - roll)
   let newboom = {
-    num: 120,
+    num: 120 + roll,
     context: '你的修为增加了120。'
   }
-  newboom.num = newboom.num + +roll
   newboom.num += Math.ceil(Math.random()*10)
   newboom.context = `你的修为增加了${newboom.num}。`
   if(getroll === 0) {
