@@ -16,6 +16,7 @@ export default class scheduleTime {
     this.postBirth()
     this.postItnews()
     this.postLastDay()
+    this.postBirthday()
   }
 
   async gongfan () {
@@ -104,5 +105,13 @@ export default class scheduleTime {
         timings.postMsg()
       })
     }
+  }
+
+  async postBirthday () {
+    let data = '祝福一位美丽迷人、聪明大方、成熟端庄，又备受赞叹的妙人儿，我家的小缘缘，生日快乐~时光易逝，江湖路远，祝你365天，天天快乐幸福~越来越年轻漂亮！'
+    schedule.scheduleJob('11 00 09 16 5 *', () => {
+      let timings = new timingTask(data, 851970427)
+      timings.postMsg()
+    })
   }
 }
