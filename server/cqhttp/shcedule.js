@@ -50,10 +50,17 @@ export default class scheduleTime {
   async postBirth () {
     let getBirthList = new getBirth()
     let data = await getBirthList.init()
-    schedule.scheduleJob('11 00 00 * * *', () => {
+    schedule.scheduleJob('11 01 00 * * *', () => {
       console.log(data)
-      let timings = new timingTask(data, 451189169)
-      timings.postMsg()
+      let bdata = ''
+      if (data) {
+        for (let i = 0; i < data.length; i++) {
+          bdata += data[i].truename;
+          
+        }
+        let timings = new timingTask(bdata, 451189169)
+        timings.postMsg()
+      }
     })
   }
 
@@ -94,8 +101,12 @@ export default class scheduleTime {
         context: '今天是耿一琪拍毕业照的时间啦！让我们一起祝福她~一琪同学，毕业快乐哟~'
       },
       {
+        time: '11 00 09 21 5 *',
+        context: '今天是丛铭钰同学拍毕业照的时间啦！让我们一起祝福她~铭钰同学，毕业快乐哟~'
+      },
+      {
         time: '11 00 09 23 5 *',
-        context: '今天是马英东拍毕业照的时间啦！让我们一起祝福她~英东同学，毕业快乐哟~'
+        context: '今天是马英东同学拍毕业照的时间啦！让我们一起祝福她~英东同学，毕业快乐哟~'
       }
     ]
     for (let i = 0; i < arrayList.length; i++) {
@@ -109,7 +120,7 @@ export default class scheduleTime {
 
   async postBirthday () {
     let data = '祝福一位美丽迷人、聪明大方、成熟端庄，又备受赞叹的妙人儿，我家的小缘缘，生日快乐~时光易逝，江湖路远，祝你365天，天天快乐幸福~越来越年轻漂亮！'
-    schedule.scheduleJob('11 00 09 16 5 *', () => {
+    schedule.scheduleJob('11 00 00 16 5 *', () => {
       let timings = new timingTask(data, 851970427)
       timings.postMsg()
     })
