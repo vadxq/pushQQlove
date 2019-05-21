@@ -17,7 +17,7 @@ export default class getItnews {
           this.data += `${list[i].title}\n`
         }
       }
-      console.log(this.data)
+      // console.log(this.data)
       return this.data
     }
   }

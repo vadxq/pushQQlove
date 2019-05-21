@@ -8,12 +8,13 @@ export default class getBirth {
 
   async init() {
     let list = await this.getBirthList()
+    console.log(list)
     if (list) {
       for (let i = 0; i < list.length; i++) {
         this.username = this.username + list[i].truename + ' '
       }
       console.log(this.username)
-      if (this.username) {
+      if (this.username!== ' ') {
         let reply = `今天是家园人${this.username}破壳诞生之日，让我们一起为他们庆祝！生日快乐~`
         return reply
       }

@@ -50,16 +50,16 @@ export default class scheduleTime {
   async postBirth () {
     let getBirthList = new getBirth()
     let data = await getBirthList.init()
-    schedule.scheduleJob('11 01 00 * * *', () => {
-      console.log(data)
+    schedule.scheduleJob('11 00 00 * * *', () => {
       let bdata = ''
       if (data) {
         for (let i = 0; i < data.length; i++) {
           bdata += data[i].truename;
-          
         }
-        let timings = new timingTask(bdata, 451189169)
-        timings.postMsg()
+        if (bdata) {
+          let timings = new timingTask(bdata, 451189169)
+          timings.postMsg()
+        }
       }
     })
   }
