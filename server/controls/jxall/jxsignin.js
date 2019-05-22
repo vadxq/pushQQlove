@@ -114,7 +114,7 @@ const getSign = (roll) => {
       num: newboom.num += 200,
       context: newboom.context += '由于你最近的roll点数运气，触发了《醉生梦死》奇遇，修为额外增加了200。'
     }
-  } else if (getroll === 7) {
+  } else if (getroll === 47) {
     newboom = {
       num: newboom.num += 300,
       context: newboom.context += '由于你最近的roll点数运气，触发了《生死判》奇遇，修为额外增加了300。'
@@ -124,7 +124,43 @@ const getSign = (roll) => {
       num: newboom.num += 500,
       context: newboom.context += '由于你最近的roll点数运气，触发了《阴阳两界》奇遇，修为额外增加了500。'
     }
+  } else if (getroll === 23) {
+    newboom = {
+      num: newboom.num += 230,
+      context: newboom.context += '由于你最近的roll点数运气，触发了《雪山恩仇》奇遇，修为额外增加了230。'
+    }
+  } else if (getroll === 45) {
+    newboom = {
+      num: newboom.num += 450,
+      context: newboom.context += '由于你最近的roll点数运气，触发了《乱世舞姬》奇遇，修为额外增加了450。'
+    }
+  } else if (getroll === 13) {
+    newboom = {
+      num: newboom.num += 130,
+      context: newboom.context += '由于你最近的roll点数运气，触发了《少年行》奇遇，修为额外增加了130。'
+    }
+  } else if (getroll === 51) {
+    newboom = {
+      num: newboom.num += 510,
+      context: newboom.context += '由于你最近的roll点数运气，触发了《天涯无归》奇遇，修为额外增加了510。'
+    }
+  } else if (getroll === 34) {
+    newboom = {
+      num: newboom.num += 340,
+      context: newboom.context += '由于你最近的roll点数运气，触发了《护佑苍生》奇遇，修为额外增加了340。'
+    }
+  } else if (getroll === 33) {
+    newboom = {
+      num: newboom.num += 330,
+      context: newboom.context += '由于你最近的roll点数运气，触发了《三山四海》奇遇，修为额外增加了330。'
+    }
+  } else if (getroll === 7) {
+    newboom = {
+      num: newboom.num += 470,
+      context: newboom.context += '由于你最近的roll点数运气，触发了《茶馆奇缘》奇遇，修为额外增加了470。'
+    }
   }
+  
   // console.log(newboom + 'getSign')
   return newboom
 }
