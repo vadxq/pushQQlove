@@ -31,7 +31,7 @@ export default class timingTask {
       //   message: msg,
       //   auto_escape: false
       // })
-      console.log(data.data)
+      // console.log(data.data)
       if (data.status === 200) {
         let data = {
           content: msg[0].data.text,

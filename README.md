@@ -136,4 +136,4 @@ pm2 start app.js
 
 #### 欢迎大家提出建议和意见，谢谢～
 
-#### license：Apache Licens Version 2.0
+#### license：Apache License Version 2.0

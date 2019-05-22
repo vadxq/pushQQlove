@@ -9,7 +9,7 @@ export default class getBirth {
   async init() {
     let list = await this.getBirthList()
     console.log(list)
-    if (list) {
+    if (list.length > 0) {
       for (let i = 0; i < list.length; i++) {
         this.username = this.username + list[i].truename + ' '
       }
