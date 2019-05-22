@@ -80,7 +80,11 @@ export const getQunList = async (ctx, next) => {
     let topdata = data.slice(0, 4)
     let top = '本群前五名分别是：'
     topdata.map((e,i)=>{
-      top += `\n${i}.${e.card},修为：${e.boom}`
+      if (e.card) {
+        top += `\n${i}.${e.card},修为：${e.boom}`
+      } else {
+        top += `\n${i}.[CQ:at,qq=${e.user_id}],修为：${e.boom}`
+      }
     })
     ctx.body = {
       status: 1,
