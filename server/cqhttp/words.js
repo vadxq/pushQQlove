@@ -4,10 +4,11 @@ const exec = util.promisify(require('child_process').exec);
 
 // 群消息处理
 export default class WordsDivid {
-  constructor (context, user_id, group_id) {
+  constructor (context, user_id, group_id, sender) {
     this.context = context
     this.user_id = user_id
     this.group_id = group_id
+    this.sender = sender
   }
   async init () {
       // 多重判断
@@ -60,10 +61,17 @@ export default class WordsDivid {
       let res = await this.getIsOpen('ping -c 4 121.14.64.155')
       return res
     }
+
     if (this.context === '签到' || this.context === 'qd') {
       let res = await this.qdSovle()
       return res
     }
+
+    if (this.context === '看大佬' || this.context === '签到排名') {
+      let res = await this.getQunList()
+      return res
+    }
+
     if (this.context.length === 3 && (/^[\u4e00-\u9fa5]{2}[\u5b8f]/).test(this.context) === true) {
       // 宏
       let url = encodeURI('http://127.0.0.1:7192/api/accept/hong?sect=' + this.context)
@@ -77,6 +85,7 @@ export default class WordsDivid {
       }
       return reply
     }
+
     if (this.context.length === 1 && (/^[\u8089]/).test(this.context) === true) {
       let roll = Math.ceil(Math.random()*100)
       let reply = `你roll到了${roll}点。\n[CQ:at,qq=${this.user_id}]`
@@ -91,6 +100,7 @@ export default class WordsDivid {
       Axios.post('http://127.0.0.1:7192/api/accept/jxsignroll', postdata)
       return reply
     }
+
     if (this.context.length > 2 && (/^[\u4e00-\u9fa5]+[\u5206\u6570]$/).test(this.context) === true) {
       let roll = Math.ceil(Math.random()*100)
       if (roll<60) {
@@ -116,6 +126,17 @@ export default class WordsDivid {
     }
   }
 
+  // 获取签到排名
+  async getQunList () {
+    let postData = {
+      group_id: this.group_id,
+    }
+    let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignlist`, postData)
+    if (res.data.status) {
+      return res.data.data
+    }
+  }
+
   async qdSovle () {
     // sign in 签到
     console.log(this.user_id, this.group_id)
@@ -137,22 +158,22 @@ export default class WordsDivid {
       if (time > 22 || time < 9) {
         let postData = {
           user_id: this.user_id,
-          group_id: this.group_id
+          group_id: this.group_id,
+          card: this.sender.card
         }
         let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
         if (res.data.status) {
-          console.log(res.data+ 'qdsovle')
           return res.data.data
         }
       }
     } else {
       let postData = {
         user_id: this.user_id,
-        group_id: this.group_id
+        group_id: this.group_id,
+        card: this.sender.card
       }
       let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
       if (res.data.status) {
-        console.log(res.data+ 'qdsovle')
         return res.data.data
       }
     }

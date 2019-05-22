@@ -71,6 +71,29 @@ export const addJxsignin = async (ctx, next) => {
   }
 }
 
+export const getQunList = async (ctx, next) => {
+  const body = ctx.request.body;
+  let data = await Jxsignin.find({group_id: body.group_id}).sort({boom: -1})
+  console.log(data)
+  if (data.length) {
+    // data.
+    let topdata = data.slice(0, 4)
+    let top = '本群前五名分别是：'
+    topdata.map((e,i)=>{
+      top += `\n${i}.${e.card},修为：${e.boom}`
+    })
+    ctx.body = {
+      status: 1,
+      data: top
+    };
+  } else {
+    ctx.body = {
+      status: 0,
+      data: '查询失败'
+    };
+  }
+}
+
 // 随机增加
 const getSign = (roll) => {
   // 签到获取
@@ -107,7 +130,8 @@ const postSign = async (newboom) => {
   let data = await Jxsignin.findOneAndUpdate({user_id: newboom.user_id, group_id: newboom.group_id}, {$set: {
     boom: newboom.boom,
     context: newboom.context,
-    day: newboom.day
+    day: newboom.day,
+    card: body.card
   }}, {multi: false});
   if (data) {
     return {
