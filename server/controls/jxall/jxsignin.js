@@ -34,7 +34,7 @@ export const addJxsignin = async (ctx, next) => {
       if (res.status) {
         ctx.body = {
           status: 1,
-          data: `[CQ:at,qq=${body.user_id}]${newboom.context},修为值达到：${data.boom += newboom.num}`
+          data: `[CQ:at,qq=${body.user_id}]${newboom.context}修为值达到：${data.boom += newboom.num}`
         }
       } else {
         ctx.body = {

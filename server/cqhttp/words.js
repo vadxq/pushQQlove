@@ -123,14 +123,38 @@ export default class WordsDivid {
     // 修改签到修为
     // 算法
     // 奇遇点在与相差点数
-    let postData = {
-      user_id: this.user_id,
-      group_id: this.group_id
-    }
-    let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
-    if (res.data.status) {
-      console.log(res.data+ 'qdsovle')
-      return res.data.data
+    
+    // 特定群
+    let qunarr = [
+      335604283,
+      451189169,
+      894815833
+    ]
+    // 设置允许时间
+
+    if (qunarr.includes(this.group_id)) {
+      let time = new Date().getHours()
+      if (time > 22 || time < 9) {
+        let postData = {
+          user_id: this.user_id,
+          group_id: this.group_id
+        }
+        let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
+        if (res.data.status) {
+          console.log(res.data+ 'qdsovle')
+          return res.data.data
+        }
+      }
+    } else {
+      let postData = {
+        user_id: this.user_id,
+        group_id: this.group_id
+      }
+      let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
+      if (res.data.status) {
+        console.log(res.data+ 'qdsovle')
+        return res.data.data
+      }
     }
   }
 }
