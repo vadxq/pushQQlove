@@ -77,13 +77,13 @@ export const getQunList = async (ctx, next) => {
   console.log(data)
   if (data.length) {
     // data.
-    let topdata = data.slice(0, 4)
+    let topdata = data.slice(0, 5)
     let top = '本群前五名分别是：'
     topdata.map((e,i)=>{
       if (e.card) {
-        top += `\n${i}.${e.card},修为：${e.boom}`
+        top += `\n${i + 1}.${e.card},修为：${e.boom}`
       } else {
-        top += `\n${i}.[CQ:at,qq=${e.user_id}],修为：${e.boom}`
+        top += `\n${i + 1}.[CQ:at,qq=${e.user_id}],修为：${e.boom}`
       }
     })
     ctx.body = {
