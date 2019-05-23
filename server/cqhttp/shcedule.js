@@ -17,6 +17,7 @@ export default class scheduleTime {
     this.postItnews()
     this.postLastDay()
     this.postBirthday()
+    this.postDrinkWater()
   }
 
   async gongfan () {
