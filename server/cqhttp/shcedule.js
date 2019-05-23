@@ -39,7 +39,7 @@ export default class scheduleTime {
   }
 
   async postHackTime () {
-    schedule.scheduleJob('10 10 10 * * *', () => {
+    schedule.scheduleJob('10 30 10 * * *', () => {
       this.postHacknews('newstories')
     })
     schedule.scheduleJob('59 30 22 * * *', () => {
@@ -85,8 +85,10 @@ export default class scheduleTime {
 
       // 生成短链接
       for (let i = 0; i < hacknewdata.length; i++) {
-        let short_url = await axios.post('https://t.vadxq.com', hacknewdata[i].url)
-        hacknewdata[i].url = 'https://t.vadxq.com/' + short_url
+        let res = await axios.post('https://t.vadxq.com', hacknewdata[i].url)
+        if (res.data) {
+          hacknewdata[i].url = 'https://t.vadxq.com/' + res.data.msg.short_url
+        }
       }
 
       let data = ''
