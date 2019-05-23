@@ -4,11 +4,11 @@ const exec = util.promisify(require('child_process').exec);
 
 // 群消息处理
 export default class WordsDivid {
-  constructor (context, user_id, group_id, sender) {
+  constructor (context, user_id, group_id, card) {
     this.context = context
     this.user_id = user_id
     this.group_id = group_id
-    this.sender = sender
+    this.card = card
   }
   async init () {
       // 多重判断
@@ -160,7 +160,7 @@ export default class WordsDivid {
         let postData = {
           user_id: this.user_id,
           group_id: this.group_id,
-          card: this.sender.card
+          card: this.card
         }
         let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
         if (res.data.status) {
@@ -171,7 +171,7 @@ export default class WordsDivid {
       let postData = {
         user_id: this.user_id,
         group_id: this.group_id,
-        card: this.sender.card
+        card: this.card
       }
       let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
       if (res.data.status) {
