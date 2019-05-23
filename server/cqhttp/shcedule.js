@@ -39,7 +39,7 @@ export default class scheduleTime {
   }
 
   async postHackTime () {
-    schedule.scheduleJob('10 25 07 * * *', () => {
+    schedule.scheduleJob('10 10 10 * * *', () => {
       this.postHacknews('newstories')
     })
     schedule.scheduleJob('59 30 22 * * *', () => {
@@ -77,9 +77,18 @@ export default class scheduleTime {
   async postHacknews (x) {
     let url = encodeURI('https://proxy.imissu.top/hacknews/' + x)
     let res = await axios.get(url)
+
+    
     // console.log(res)
     if (res.status) {
       let hacknewdata = res.data
+
+      // 生成短链接
+      for (let i = 0; i < hacknewdata.length; i++) {
+        let short_url = await axios.post('https://t.vadxq.com', hacknewdata[i].url)
+        hacknewdata[i].url = 'https://t.vadxq.com/' + short_url
+      }
+
       let data = ''
       let date = new Date()
       let time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`

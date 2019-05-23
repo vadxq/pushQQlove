@@ -155,7 +155,7 @@ export default class WordsDivid {
 
     if (qunarr.includes(this.group_id)) {
       let time = new Date().getHours()
-      if (time > 22 || time < 9) {
+      if (time > 21 || time < 10) {
         let postData = {
           user_id: this.user_id,
           group_id: this.group_id,

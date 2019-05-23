@@ -35,10 +35,6 @@ export default class hacknews {
       let data = await axios.get(`https://hacker-news.firebaseio.com/v0/${x}.json?print=pretty`)
       if (data.status === 200) {
         let res = data.data.slice(0, 7)
-        for (let i = 0; i < res.length; i++) {
-          let short_url = await axios.post('https://t.vadxq.com', res[i].url)
-          res[i].url = 'https://t.vadxq.com/' + short_url
-        }
         // console.log(res)
         return res
       } else {
