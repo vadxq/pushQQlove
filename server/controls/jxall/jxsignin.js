@@ -171,7 +171,7 @@ const postSign = async (newboom) => {
     boom: newboom.boom,
     context: newboom.context,
     day: newboom.day,
-    card: body.card
+    card: newboom.card
   }}, {multi: false});
   if (data) {
     return {

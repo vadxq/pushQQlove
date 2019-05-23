@@ -14,7 +14,10 @@ const jxsigninSchema = new Schema({
   },
   group_id: Number, // 群hao
   user_id: Number, // QQ号
-  card: String, // 群备注
+  card: {
+    type: String,
+    default: '佚名'
+  }, // 群备注
   boom: {
     type: Number,
     default: 0
