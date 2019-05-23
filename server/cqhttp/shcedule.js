@@ -85,7 +85,7 @@ export default class scheduleTime {
 
       // 生成短链接
       for (let i = 0; i < hacknewdata.length; i++) {
-        let res = await axios.post('https://t.vadxq.com', hacknewdata[i].url)
+        let res = await axios.post('https://t.vadxq.com', {long_url: hacknewdata[i].url})
         if (res.data) {
           hacknewdata[i].url = 'https://t.vadxq.com/' + res.data.msg.short_url
         }

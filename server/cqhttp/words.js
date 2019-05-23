@@ -154,7 +154,8 @@ export default class WordsDivid {
     // 设置允许时间
 
     if (qunarr.includes(this.group_id)) {
-      let time = new Date().getHours()
+      let nowDate = getLocalTime(8)
+      let time = nowDate.getHours()
       if (time > 21 || time < 10) {
         let postData = {
           user_id: this.user_id,
@@ -180,3 +181,16 @@ export default class WordsDivid {
   }
 }
 // 私聊消息处理
+
+
+const getLocalTime = function (i) {
+  if (typeof i !== 'number') return;
+  var d = new Date();
+  //得到1970年一月一日到现在的秒数
+  var len = d.getTime();
+  //本地时间与GMT时间的时间偏移差
+  var offset = d.getTimezoneOffset() * 60000;
+  //得到现在的格林尼治时间
+  var utcTime = len + offset;
+  return new Date(utcTime + 3600000 * i);
+}
