@@ -26,7 +26,7 @@ export default class spider {
   // get page id
   async getId() {
     let day = new dayComputed('2019-3-1')
-    this.id = day.fn() + 2366
+    this.id = day.fn() + 2365
   }
 
   // get words
