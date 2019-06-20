@@ -41,7 +41,7 @@ bot.on('notice', async context => {
           if (context.group_id === 436976635) {
             bot('send_group_msg_async', {
               group_id: context.group_id,
-              message: `欢迎${name}来到酒馆亲友帮~帮会yy39043，可以来yy领个马甲~欢迎常来唠嗑哟~`
+              message: `欢迎${name}来到酒馆亲友帮~帮会yy523700，可以来yy领个马甲~欢迎常来唠嗑哟~`
             }).catch(err => { });
           } else if (context.group_id === 335604283) {
             bot('send_group_msg_async', {
