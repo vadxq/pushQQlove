@@ -109,6 +109,8 @@ export default class WordsDivid {
           }
           Axios.post('http://127.0.0.1:7192/api/accept/jxsignroll', postdata)
           return reply
+        } else {
+          return '肉时间改为晚上10点至早上9点哟'
         }
       // } else {
       //   let postdata = {
@@ -138,6 +140,8 @@ export default class WordsDivid {
             reply = `恭喜你，你的${this.context}将获得99分。\n[CQ:at,qq=${this.user_id}]`
           }
           return reply
+        } else {
+          return '祈祷分数时间改为晚上10点至早上9点哟'
         }
       // } else {
       //   let reply = `恭喜你，你的${this.context}将获得${roll}分。\n[CQ:at,qq=${this.user_id}]`
@@ -202,6 +206,8 @@ export default class WordsDivid {
         if (res.data.status) {
           return res.data.data
         }
+      } else {
+        return '签到时间改为晚上10点至早上9点哟'
       }
     // } else {
     //   let postData = {
