@@ -93,15 +93,15 @@ export default class WordsDivid {
         reply = `你roll到了99点。\n[CQ:at,qq=${this.user_id}]`
       }
       // 特定群
-      let qunarr = [
-        335604283
-      ]
+      // let qunarr = [
+      //   335604283
+      // ]
       // 设置允许时间
 
-      if (qunarr.includes(this.group_id)) {
+      // if (qunarr.includes(this.group_id)) {
         let nowDate = getLocalTime(8)
         let time = nowDate.getHours()
-        if (time > 23 || time < 9) {
+        if (time > 21 || time < 10) {
           let postdata = {
             roll: roll,
             user_id: this.user_id,
@@ -110,15 +110,15 @@ export default class WordsDivid {
           Axios.post('http://127.0.0.1:7192/api/accept/jxsignroll', postdata)
           return reply
         }
-      } else {
-        let postdata = {
-          roll: roll,
-          user_id: this.user_id,
-          group_id: this.group_id
-        }
-        Axios.post('http://127.0.0.1:7192/api/accept/jxsignroll', postdata)
-        return reply
-      }
+      // } else {
+      //   let postdata = {
+      //     roll: roll,
+      //     user_id: this.user_id,
+      //     group_id: this.group_id
+      //   }
+      //   Axios.post('http://127.0.0.1:7192/api/accept/jxsignroll', postdata)
+      //   return reply
+      // }
     }
 
     if (this.context.length > 2 && (/^[\u4e00-\u9fa5]+[\u5206\u6570]$/).test(this.context) === true) {
@@ -126,26 +126,26 @@ export default class WordsDivid {
       if (roll<60) {
         roll += 30
       }
-      let qunarr = [
-        335604283
-      ]
-      if (qunarr.includes(this.group_id)) {
+      // let qunarr = [
+      //   335604283
+      // ]
+      // if (qunarr.includes(this.group_id)) {
         let nowDate = getLocalTime(8)
         let time = nowDate.getHours()
-        if (time > 23 || time < 9) {
+        if (time > 21 || time < 10) {
           let reply = `恭喜你，你的${this.context}将获得${roll}分。\n[CQ:at,qq=${this.user_id}]`
           if (this.user_id === 862235971 | this.user_id === 1044689145) {
             reply = `恭喜你，你的${this.context}将获得99分。\n[CQ:at,qq=${this.user_id}]`
           }
           return reply
         }
-      } else {
-        let reply = `恭喜你，你的${this.context}将获得${roll}分。\n[CQ:at,qq=${this.user_id}]`
-        if (this.user_id === 862235971 | this.user_id === 1044689145) {
-          reply = `恭喜你，你的${this.context}将获得99分。\n[CQ:at,qq=${this.user_id}]`
-        }
-        return reply
-      }
+      // } else {
+      //   let reply = `恭喜你，你的${this.context}将获得${roll}分。\n[CQ:at,qq=${this.user_id}]`
+      //   if (this.user_id === 862235971 | this.user_id === 1044689145) {
+      //     reply = `恭喜你，你的${this.context}将获得99分。\n[CQ:at,qq=${this.user_id}]`
+      //   }
+      //   return reply
+      // }
       
     }
   }
@@ -182,14 +182,14 @@ export default class WordsDivid {
     // 奇遇点在与相差点数
     
     // 特定群
-    let qunarr = [
-      335604283,
-      451189169,
-      894815833
-    ]
+    // let qunarr = [
+    //   335604283,
+    //   451189169,
+    //   894815833
+    // ]
     // 设置允许时间
 
-    if (qunarr.includes(this.group_id)) {
+    // if (qunarr.includes(this.group_id)) {
       let nowDate = getLocalTime(8)
       let time = nowDate.getHours()
       if (time > 21 || time < 10) {
@@ -203,17 +203,17 @@ export default class WordsDivid {
           return res.data.data
         }
       }
-    } else {
-      let postData = {
-        user_id: this.user_id,
-        group_id: this.group_id,
-        card: this.card
-      }
-      let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
-      if (res.data.status) {
-        return res.data.data
-      }
-    }
+    // } else {
+    //   let postData = {
+    //     user_id: this.user_id,
+    //     group_id: this.group_id,
+    //     card: this.card
+    //   }
+    //   let res = await Axios.post(`http://127.0.0.1:7192/api/accept/jxsignin`, postData)
+    //   if (res.data.status) {
+    //     return res.data.data
+    //   }
+    // }
   }
 }
 // 私聊消息处理
