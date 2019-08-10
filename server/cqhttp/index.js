@@ -4,6 +4,9 @@ import scheduleTime from './shcedule'
 
 let schedule = new scheduleTime()
 schedule.init()
+var qunarr = [
+  812546838
+]
 
 const bot = new CQHttp({
   apiRoot: 'http://127.0.0.1:7187/'
@@ -48,12 +51,12 @@ bot.on('notice', async context => {
               group_id: context.group_id,
               message: `欢迎[CQ:at,qq=${context.user_id}]来到南昌大学新生总群~记得改备注哦：未录取新生群备注：年份-省份/文理-昵称，录取新生群备注：年份-专业-昵称，在校生群备注：年份-专业-昵称。改完备注后请仔细阅读群文件，或者是和机器人交互，群内发送消息：呀南昌大学答疑。还有不懂可以提问。祝水群愉快！`
             }).catch(err => { });
-          } else {
+          } else if (!qunarr.includes(context.group_id) && context.group_id !== 335604283) {
             bot('send_group_msg_async', {
                 group_id: context.group_id,
                 message: `欢迎${name}～`
             }).catch(err => { });
-          }
+          };
       }).catch(err => {
           console.log(err);
       });

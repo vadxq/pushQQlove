@@ -93,12 +93,12 @@ export default class WordsDivid {
         reply = `你roll到了99点。\n[CQ:at,qq=${this.user_id}]`
       }
       // 特定群
-      // let qunarr = [
-      //   335604283
-      // ]
+      let qunarr = [
+        812546838
+      ]
       // 设置允许时间
 
-      // if (qunarr.includes(this.group_id)) {
+      if (!qunarr.includes(this.group_id)) {
         let nowDate = getLocalTime(8)
         let time = nowDate.getHours()
         if (time > 21 || time < 10) {
@@ -112,6 +112,7 @@ export default class WordsDivid {
         } else {
           return '肉时间改为晚上10点至早上9点哟'
         }
+      }
       // } else {
       //   let postdata = {
       //     roll: roll,
@@ -128,10 +129,10 @@ export default class WordsDivid {
       if (roll<60) {
         roll += 30
       }
-      // let qunarr = [
-      //   335604283
-      // ]
-      // if (qunarr.includes(this.group_id)) {
+      let qunarr = [
+        812546838
+      ]
+      if (!qunarr.includes(this.group_id)) {
         let nowDate = getLocalTime(8)
         let time = nowDate.getHours()
         if (time > 21 || time < 10) {
@@ -143,6 +144,7 @@ export default class WordsDivid {
         } else {
           return '祈祷分数时间改为晚上10点至早上9点哟'
         }
+      }
       // } else {
       //   let reply = `恭喜你，你的${this.context}将获得${roll}分。\n[CQ:at,qq=${this.user_id}]`
       //   if (this.user_id === 862235971 | this.user_id === 1044689145) {
