@@ -21,7 +21,7 @@ export default class scheduleTime {
   }
 
   async gongfan () {
-    let timings = new timingTask('[CQ:at,qq={all}]马上就要开始攻防排队了哟~~攻防小指南请看酒馆宏哟~~', 436976635)
+    let timings = new timingTask('假装@全体成员 马上就要开始攻防排队了哟~~攻防小指南请看酒馆宏哟~~', 436976635)
     schedule.scheduleJob('16 20 19 * * 2,4', () => {
       timings.postMsg()
     })
@@ -68,7 +68,7 @@ export default class scheduleTime {
   async postItnews () {
     let getItnewsList = new getItnews()
     let data = await getItnewsList.init()
-    schedule.scheduleJob('11 00 08 * * *', () => {
+    schedule.scheduleJob('11 00 08 * * 0', () => {
       console.log(data)
       let timings = new timingTask(data, 451189169)
       timings.postMsg()
