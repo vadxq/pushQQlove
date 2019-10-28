@@ -68,11 +68,11 @@ bot.on('request', context => {
   if (context.request_type === 'group') {
       // 处理加群请求
       if (context.sub_type === 'invite') {
-        bot('set_group_add_request', {
-          flag: context.flag,
-          sub_type: 'invite',
-          approve: true
-        }).catch(err => { });
+        // bot('set_group_add_request', {
+         // flag: context.flag,
+          //sub_type: 'invite',
+          //approve: true
+        //}).catch(err => { });
       }
   }
   if (context.request_type === 'friend') {
