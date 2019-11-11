@@ -101,7 +101,7 @@ export default class WordsDivid {
       if (!qunarr.includes(this.group_id)) {
         let nowDate = getLocalTime(8)
         let time = nowDate.getHours()
-        if (time > 21 || time < 10) {
+        // if (time > 21 || time < 10) {
           let postdata = {
             roll: roll,
             user_id: this.user_id,
@@ -109,9 +109,9 @@ export default class WordsDivid {
           }
           Axios.post('http://127.0.0.1:7192/api/accept/jxsignroll', postdata)
           return reply
-        } else {
-          return '肉时间改为晚上10点至早上9点哟'
-        }
+        // } else {
+        //   return '肉时间改为晚上10点至早上9点哟'
+        // }
       }
       // } else {
       //   let postdata = {
